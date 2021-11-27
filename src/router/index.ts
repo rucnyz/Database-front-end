@@ -5,7 +5,7 @@ export default createRouter({
     'routes':[
         {
             path:"/",
-            redirect:"test"
+            redirect:"login"
         },
         {
             path:"/test",
@@ -22,6 +22,10 @@ export default createRouter({
         {
             path:'/register',
             component: ()=>import("../pages/register.vue")
+        },
+        {
+            path:'/login',
+            component: ()=>import("../pages/login.vue")
         }
     ]
 })
