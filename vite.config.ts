@@ -9,7 +9,7 @@ export default defineConfig({
     proxy:{
       "/api/test":{
         // target: "http://192.168.210.46:5200",
-        target: "http://127.0.0.1:5000",
+        target: "http://127.0.0.1:5200",
         changeOrigin: true,
       },
     }
