@@ -1,6 +1,9 @@
 <template>
+    <n-pageheader>header</n-pageheader>
     <h1>welcome to {{message}}</h1>
     <router-link to="/about">go to about</router-link><br>
+    <router-link to="/register">go to register</router-link>
+    
 
 </template>
 

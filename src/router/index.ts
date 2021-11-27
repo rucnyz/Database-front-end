@@ -5,7 +5,11 @@ export default createRouter({
     'routes':[
         {
             path:"/",
-            redirect:"home"
+            redirect:"test"
+        },
+        {
+            path:"/test",
+            component:()=>import("../pages/test.vue")
         },
         {
             path:"/home",
@@ -14,6 +18,10 @@ export default createRouter({
         {
             path:'/about',
             component: ()=>import("../pages/about.vue")
+        },
+        {
+            path:'/register',
+            component: ()=>import("../pages/register.vue")
         }
     ]
 })
