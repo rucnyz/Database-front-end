@@ -8,7 +8,7 @@
     const axios:any = inject("axios")
     const message = ref("hello")
     function getList(): void {
-        axios.post("test", {
+        axios.post("/api/test", {
             "version": "0.1",
             "test": "hello"
             })
