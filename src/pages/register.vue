@@ -1,6 +1,7 @@
 <template>
     <div class="register_page">
         <n-h2>hello</n-h2>
+        <h2>hello</h2>
         <n-input />
     </div>
 </template>
