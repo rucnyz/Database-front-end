@@ -53,9 +53,9 @@ function postLoginInfo(): void {
   shaPassword.update(password.value)
   console.log(shaPassword.getHash("HEX"))// 测试一下
   const info = {
-    "version": "0.1",
-    "name": username.value,
-    "password": shaPassword.getHash("HEX")
+    version: "0.1",
+    name: username.value,
+    password: shaPassword.getHash("HEX")
   }
   // 传递过去
   axios.post("/api/login", info).then((response: { data: any; }) => {
