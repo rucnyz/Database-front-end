@@ -173,7 +173,7 @@ function postLoginInfo(): void {
 .container {
   width: 100vw;
   height: 100vh;
-  background-image: url("../../public/img/background.jpeg");
+  background-image: url("@/assets/img/background.jpeg");
   background-size: 100% 100%;
   display: flex;
   justify-content: center;

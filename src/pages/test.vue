@@ -11,4 +11,6 @@ const axios: any = inject("axios")
 const message = useMessage()
 message.info("hello")
 
+function getList():void{console.log("clicked")}
+
 </script>
