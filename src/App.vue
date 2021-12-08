@@ -5,7 +5,9 @@
 
 <template>
   <div id="app">
+    <n-message-provider>
         <router-view></router-view>
+    </n-message-provider>
     </div>
 </template>
 
@@ -16,6 +18,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /*margin-top: 60px;*/
 }
 </style>
