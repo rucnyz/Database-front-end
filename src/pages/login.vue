@@ -8,7 +8,7 @@
       <!-- 输入区 -->
       <section class="input-area">
         <p class="one-item">
-          <n-input v-model="name" clearable placeholder="请输入账号"></n-input>
+          <n-input v-model="username" clearable placeholder="请输入账号"></n-input>
         </p>
         <p class="one-item">
           <n-input v-model="password" clearable type="password" placeholder="请输入密码"></n-input>

@@ -12,6 +12,7 @@
                 v-model="realName"
                 clearable
                 placeholder="请输入姓名"
+                @input="onInputrealName"
             ></n-input>
           </p>
           <p class="one-item">
@@ -19,6 +20,7 @@
                 v-model="phoneNumber"
                 clearable
                 placeholder="请输入手机号"
+                @input="onInputphoneNumber"
             ></n-input>
           </p>
           <p class="one-item">
@@ -26,6 +28,7 @@
                 v-model="nickName"
                 clearable
                 placeholder="请输入昵称"
+                @input="onInputnickName"
             ></n-input>
           </p>
           <p class="one-item">
@@ -33,6 +36,7 @@
                 v-model="password"
                 clearable
                 type="password"
+                @input="onInputpassword"
                 placeholder="请输入密码"
             ></n-input>
           </p>
@@ -79,11 +83,31 @@ const loading = ref(false);
 const shaPassword = new jsSHA("SHA-256", "TEXT", {encoding: "UTF8"});
 
 // 信息提示
-console.log(useMessage);
 const message = useMessage();
+
+function onInputrealName(e: string) {
+  console.log(e)
+  realName.value = e
+}
+
+function onInputphoneNumber(e: string) {
+  console.log(e)
+  phoneNumber.value = e
+}
+
+function onInputnickName(e: string) {
+  console.log(e)
+  nickName.value = e
+}
+
+function onInputpassword(e: string) {
+  console.log(e)
+  password.value = e
+}
 
 // 用于传递信息给后端，当点击登录按钮触发
 function postLoginInfo(): void {
+  console.log(realName.value);
   // 正则校验
   let regPhone = /^[1][3,4,5,6,7,8][0-9]{9}$/;
   let regPassword = /^((\w){6,15}|(\w){32})$/;
