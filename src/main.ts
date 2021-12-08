@@ -13,11 +13,12 @@ import {
     NH2,
     NLayout,
     NSpace,
-    NInput
+    NInput,
+    NMessageProvider
 } from 'naive-ui'
 
 const naive = create({
-    components: [NButton, NPageHeader, NH2, NLayout, NSpace, NInput]
+    components: [NButton, NPageHeader, NH2, NLayout, NSpace, NInput, NMessageProvider]
 })
 // 创建一个新的 store 实例
 const store = createStore({
