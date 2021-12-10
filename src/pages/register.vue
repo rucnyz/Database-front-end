@@ -65,6 +65,7 @@ import jsSHA from "jssha";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 import {useMessage} from "naive-ui";
+import {getEncrypt} from '../api/index'
 
 const store = useStore(); // 获取vuex实例
 const router = useRouter(); // 获取router实例
@@ -86,22 +87,18 @@ const shaPassword = new jsSHA("SHA-256", "TEXT", {encoding: "UTF8"});
 const message = useMessage();
 
 function onInputrealName(e: string) {
-  console.log(e)
   realName.value = e
 }
 
 function onInputphoneNumber(e: string) {
-  console.log(e)
   phoneNumber.value = e
 }
 
 function onInputnickName(e: string) {
-  console.log(e)
   nickName.value = e
 }
 
 function onInputpassword(e: string) {
-  console.log(e)
   password.value = e
 }
 
@@ -131,11 +128,9 @@ function postLoginInfo(): void {
   // 首先加载
   loading.value = !loading.value;
   // 进行加密
-  shaPassword.update(password.value);
-  console.log(shaPassword.getHash("HEX")); // 测试一下
   const info = {
     version: "0.1",
-    password: shaPassword.getHash("HEX"),
+    password: getEncrypt(password.value),
     realName: realName.value,
     nickName: nickName.value,
     phoneNumber: phoneNumber.value,

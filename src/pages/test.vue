@@ -13,7 +13,7 @@ message.info("hello")
 
 function getList(): void {
   console.log("clicked")
-  axios.post("/api/Test/test_json", {"hello":"hello"})
+  axios.post("/api/Test/test_json", {hello: "hello"})
 }
 
 </script>

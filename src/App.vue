@@ -6,9 +6,9 @@
 <template>
   <div id="app">
     <n-message-provider>
-        <router-view></router-view>
+      <router-view></router-view>
     </n-message-provider>
-    </div>
+  </div>
 </template>
 
 <style>

@@ -8,10 +8,10 @@
       <!-- 输入区 -->
       <section class="input-area">
         <p class="one-item">
-          <n-input v-model="username" clearable placeholder="请输入账号"></n-input>
+          <n-input v-model="phone" placeholder="请输入账号" @input="onInputPhone"></n-input>
         </p>
         <p class="one-item">
-          <n-input v-model="password" clearable type="password" placeholder="请输入密码"></n-input>
+          <n-input v-model="password" clearable type="password" placeholder="请输入密码" @input="onInputPassword"></n-input>
         </p>
       </section>
 
@@ -31,10 +31,11 @@ import {ref, inject} from 'vue'
 import jsSHA from "jssha"
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
+import {getEncrypt} from '../api/index'
 
 const store = useStore() // 获取vuex实例
 const router = useRouter() // 获取router实例
-const username = ref(null)
+const phone = ref("")
 const password = ref("")
 // 用于传递数据给后端
 const axios: any = inject("axios")
@@ -42,20 +43,26 @@ const axios: any = inject("axios")
 const Login = ref("Login")
 // True为正在加载
 const loading = ref(false)
+
 // 使用SHA256加密
-const shaPassword = new jsSHA("SHA-256", "TEXT", {encoding: "UTF8"})
+
+function onInputPhone(e: string) {
+  phone.value = e
+}
+
+function onInputPassword(e: string) {
+  password.value = e
+}
 
 // 用于传递信息给后端，当点击登录按钮触发
 function postLoginInfo(): void {
   // 首先加载
   loading.value = !loading.value
   // 进行加密
-  shaPassword.update(password.value)
-  console.log(shaPassword.getHash("HEX"))// 测试一下
   const info = {
     version: "0.1",
-    phoneNumber: username.value,
-    password: shaPassword.getHash("HEX")
+    phoneNumber: phone.value,
+    password: getEncrypt(password.value)
   }
   // 传递过去
   axios.post("/api/customer/login", info).then((response: { data: any; }) => {
