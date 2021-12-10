@@ -142,7 +142,7 @@ function postLoginInfo(): void {
   };
   // 传递过去
   axios
-      .post("/api/register", info)
+      .post("/api/customer/register", info)
       .then((response: { data: any }) => {
         loading.value = !loading.value;
         console.log(response.data);

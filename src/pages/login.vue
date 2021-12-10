@@ -54,17 +54,17 @@ function postLoginInfo(): void {
   console.log(shaPassword.getHash("HEX"))// 测试一下
   const info = {
     version: "0.1",
-    name: username.value,
+    phoneNumber: username.value,
     password: shaPassword.getHash("HEX")
   }
   // 传递过去
-  axios.post("/api/login", info).then((response: { data: any; }) => {
+  axios.post("/api/customer/login", info).then((response: { data: any; }) => {
     console.log(response.data)
     let data = response.data;
     if (data.statusCode == "successful") {
       // 判断是否可以登录
       router.push({
-        path: '/home'
+        path: '/homePage'
       })
     }
 
