@@ -31,7 +31,7 @@ import {ref, inject} from 'vue'
 import jsSHA from "jssha"
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
-import {getEncrypt} from '../api/index'
+import {getEncrypt} from '../api'
 
 const store = useStore() // 获取vuex实例
 const router = useRouter() // 获取router实例
@@ -70,8 +70,11 @@ function postLoginInfo(): void {
     let data = response.data;
     if (data.statusCode == "successful") {
       // 判断是否可以登录
+      // 设置数据
+      localStorage.customer_ID = data["ID"];
+      localStorage.
       router.push({
-        path: '/homePage'
+        path: '/home'
       })
     }
 

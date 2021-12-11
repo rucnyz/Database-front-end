@@ -68,7 +68,7 @@
 
 <script>
 import Header from "../components/header.vue";
-import {defineComponent, ref, onMounted} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import axios from "axios";
 
 export default defineComponent({
@@ -113,8 +113,7 @@ export default defineComponent({
           {
             console.log(response.data);
             total.value = response.data.totalSize;
-            let list = goodList.value.concat(response.data.detail);
-            goodList.value = list;
+            goodList.value = goodList.value.concat(response.data.detail);
           })
           .catch((error) =>
           {
@@ -160,8 +159,7 @@ export default defineComponent({
           .then((response) =>
           {
             console.log(response.data);
-            let list = response.data.detail;
-            carouselList.value = list;
+            carouselList.value = response.data.detail;
           })
           .catch((error) =>
           {
@@ -173,16 +171,16 @@ export default defineComponent({
     window.onscroll = function ()
     {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
-      var scrollTop =
+      const scrollTop =
           document.documentElement.scrollTop || document.body.scrollTop;
       //变量windowHeight是可视区的高度
-      var windowHeight =
+      const windowHeight =
           document.documentElement.clientHeight || document.body.clientHeight;
       //变量scrollHeight是滚动条的总高度
-      var scrollHeight =
+      const scrollHeight =
           document.documentElement.scrollHeight || document.body.scrollHeight;
       //滚动条到底部的条件
-      if (scrollTop + windowHeight == scrollHeight)
+      if (Math.round(scrollTop) + windowHeight === scrollHeight)
       {
         //写后台加载数据的函数
         console.log("到顶部", total.value, goodList.value.length);
@@ -194,7 +192,7 @@ export default defineComponent({
       }
 
       // 搜索框吸顶效果
-      console.log(scrollTop);
+      console.log(scrollTop, windowHeight, scrollHeight);
       if (scrollTop >= 35)
       {
         fixed.value = "search-fixed";
