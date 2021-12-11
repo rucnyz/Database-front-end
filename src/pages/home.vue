@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import Header from "../components/header.vue";
+import Header from "../components/PageHeader.vue";
 import {defineComponent, onMounted, ref} from "vue";
 import axios from "axios";
 

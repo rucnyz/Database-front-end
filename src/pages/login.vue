@@ -72,7 +72,6 @@ function postLoginInfo(): void {
       // 判断是否可以登录
       // 设置数据
       localStorage.customer_ID = data["ID"];
-      localStorage.
       router.push({
         path: '/home'
       })
