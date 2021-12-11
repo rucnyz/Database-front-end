@@ -1,0 +1,264 @@
+// 公共样式
+body,
+ul,
+li,
+dl,
+dt,
+dd,
+p,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+img,
+table,
+fieldset,
+legend,
+input {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li,
+ol {
+  list-style: none;
+}
+
+img,
+fieldset {
+  border: 0;
+}
+
+img {
+  display: inline-block;
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  font-weight: 100;
+}
+
+body {
+  font-family: "微软雅黑";
+}
+
+input,
+a {
+  outline: none;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+// 公共css
+.margin-bottom {
+  margin-bottom: 30px;
+}
+
+.ml-10 {
+  margin: 0 10px;
+}
+
+.mb-10 {
+  margin: 10px 0;
+}
+
+.mb-30 {
+  margin: 30px 0;
+}
+
+.mb-20 {
+  margin: 20px 0;
+}
+
+.mb-50 {
+  margin: 50px 0;
+}
+
+#app {
+  height: 100%;
+}
+
+.mtop30 {
+  margin-top: 30px;
+}
+
+.fontBold {
+  font-weight: bold;
+}
+
+.mtrt20 {
+  margin-right: 20px;
+}
+
+.wid300 {
+  width: 300px !important;
+}
+
+.btnStyle1 {
+  padding: 11px 20px !important;
+}
+
+
+#app .clearFixed:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.loginCon .el-input__inner {
+  // background: rgba(0, 0, 0, 0.1);
+  background: #fff;
+  height: 50px;
+  outline: none;
+  border: none;
+}
+
+.loginCon .el-form-item {
+  // border: 1px solid hsla(0, 0%, 100%, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.marginLeft {
+  margin-left: 64px !important;
+}
+
+.pTitle {
+  font-size: 14px;
+  color: #666;
+  padding: 10px 0;
+
+  code {
+    background-color: #f9fafc;
+    padding: 0 4px;
+    border: 1px solid #eaeefb;
+    border-radius: 4px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+
+  i {
+    margin-right: 5px;
+    color: #ffc107;
+    font-size: 18px;
+  }
+}
+
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+// 公共样式
+@media screen and (max-width: 1180px) {
+  .maxCom {
+    width: 1180px !important;
+  }
+}
+
+.conCom[data-v-3d07247d] {
+  min-height: calc(100vh - 344px);
+  background: #f7faff;
+}
+
+.wid-con {
+  width: 1180px !important;
+  margin: 0 auto;
+}
+
+.empty {
+  text-align: center;
+}
+
+.overflow {
+  overflow: hidden;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+
+/* 超出部分显示省略号 */
+
+
+/* 单行 */
+
+.text-cut {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* 多行 */
+
+.text-cut-2 {
+  width: 100%;
+  overflow: hidden;
+  /* 将对象作为弹性伸缩盒子模型显示 */
+  display: -webkit-box;
+  /* 设置伸缩盒子对象的子元素的排列方式 */
+  -webkit-box-orient: vertical;
+  /* 限制显示几行 */
+  -webkit-line-clamp: 2;
+  /* 让浏览器实现在任意位置的换行 */
+  word-break: break-all;
+}
+
+.nav-list {
+  -moz-user-select: none;
+  /* Firefox私有属性 */
+  -webkit-user-select: none;
+  /* WebKit内核私有属性 */
+  -ms-user-select: none;
+  /* IE私有属性(IE10及以后) */
+  -khtml-user-select: none;
+  /* KHTML内核私有属性 */
+  -o-user-select: none;
+  /* Opera私有属性 */
+  user-select: none;
+  /* CSS3属性 */
+}

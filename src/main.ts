@@ -1,10 +1,10 @@
 import {createApp} from 'vue'
 import App from './App.vue'
-import router from './router/index'
+import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import store from './router/index'
-
+import {createStore} from 'vuex'
+import "./style/index.less";
 import {
     // create naive ui
     create,
@@ -15,13 +15,28 @@ import {
     NLayout,
     NSpace,
     NInput,
-    NMessageProvider
+    NMessageProvider,
+    NInputGroup,
+    NCarousel
 } from 'naive-ui'
 
 const naive = create({
-    components: [NButton, NPageHeader, NH2, NLayout, NSpace, NInput, NMessageProvider]
+    components: [NButton, NPageHeader, NH2, NLayout, NSpace, NInput, NMessageProvider,
+        NCarousel, NInputGroup]
 })
-
+// 创建一个新的 store 实例
+const store = createStore({
+    state() {
+        return {
+            count: 0
+        }
+    },
+    mutations: {
+        increment(state: { count: number }) {
+            state.count++
+        }
+    }
+})
 const app = createApp(App)
 app.use(router)
 app.use(naive)
