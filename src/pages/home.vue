@@ -2,10 +2,33 @@
   <div class="home">
     <Header/>
     <div class="wid-con section">
-      <div class="search" :class="fixed">
+      <!-- 搜索 -->
+      <div class="search">
         <n-input-group class="flex justify-center">
-          <n-input placeholder="请输入喜欢的宝贝" :style="{ width: '50%' }"/>
-          <n-button type="primary" ghost>搜索</n-button>
+          <n-input
+              placeholder="请输入喜欢的宝贝"
+              @input="inputSearchChange"
+              v-model="keywords"
+              :style="{ width: '50%' }"
+          />
+          <n-button type="primary" ghost @click="goGoodListPage()"
+          >搜索
+          </n-button
+          >
+        </n-input-group>
+      </div>
+      <div class="search search-fixed" v-if="fixed">
+        <n-input-group class="flex justify-center">
+          <n-input
+              placeholder="请输入喜欢的宝贝"
+              @input="inputSearchChange"
+              v-model="keywords"
+              :style="{ width: '50%' }"
+          />
+          <n-button type="primary" ghost @click="goGoodListPage()"
+          >搜索
+          </n-button
+          >
         </n-input-group>
       </div>
       <div class="flex margin-bottom">
@@ -13,7 +36,7 @@
           <div
               v-for="(item, index) in classifyList"
               :key="index"
-              @click="goCarouselDetail(item)"
+              @click="goGoodListPage(item.title)"
           >
             <span>{{ item.title }}</span>
           </div>
@@ -25,11 +48,12 @@
                 @click="goGoodDetail(item)"
                 :key="index"
                 class="carousel-img"
-                :src="item.goodImg"
+                :src="item.product_pic"
             />
           </n-carousel>
         </div>
       </div>
+      <!-- 商品 -->
       <div
           style="
           margin-left: 20px;
@@ -48,27 +72,27 @@
             @click="goGoodDetail(item)"
         >
           <div class="good-img">
-            <img :src="item.goodImg" alt=""/>
+            <img :src="item.product_pic" alt=""/>
           </div>
           <div class="text-cut-2 good-name">
-            {{ item.goodName }}
+            {{ item.product_name }}
           </div>
-          <div class="price">¥ {{ item.goodPrice }}</div>
+          <div class="price">¥ {{ item.price }}</div>
         </div>
-        <div
-            v-if="goodList.length >= total"
-            style="text-align: center; margin: 30px auto"
-        >
-          没有更多数据
-        </div>
+      </div>
+      <div
+          v-if="goodList.length >= total"
+          style="text-align: center; margin: 30px auto"
+      >
+        没有更多数据
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "../components/PageHeader.vue";
-import {defineComponent, onMounted, ref} from "vue";
+import Header from "../components/header.vue";
+import {defineComponent, ref, onMounted} from "vue";
 import axios from "axios";
 
 export default defineComponent({
@@ -76,10 +100,6 @@ export default defineComponent({
 
   setup()
   {
-    // 去分类详情
-    function goCarouselDetail()
-    {
-    }
 
     // 去商品详情
     function goGoodDetail()
@@ -98,6 +118,26 @@ export default defineComponent({
     const currentPage = ref(1);
     const total = ref(0);
     const fixed = ref("");
+    const keywords = ref("");
+
+    function inputSearchChange(val)
+    {
+      console.log(val);
+      keywords.value = val;
+    }
+
+    // 去结果页
+    function goGoodListPage(val = "")
+    {
+      console.log(keywords.value);
+      this.$router.push({
+        path: "/good-list",
+        query: {
+          keywords: keywords.value || "",
+          category: val,
+        },
+      });
+    }
 
     // 获取商品列表
     function getGoodList()
@@ -113,7 +153,8 @@ export default defineComponent({
           {
             console.log(response.data);
             total.value = response.data.totalSize;
-            goodList.value = goodList.value.concat(response.data.detail);
+            let list = goodList.value.concat(response.data.detail);
+            goodList.value = list;
           })
           .catch((error) =>
           {
@@ -159,7 +200,8 @@ export default defineComponent({
           .then((response) =>
           {
             console.log(response.data);
-            carouselList.value = response.data.detail;
+            let list = response.data.detail;
+            carouselList.value = list;
           })
           .catch((error) =>
           {
@@ -171,16 +213,16 @@ export default defineComponent({
     window.onscroll = function ()
     {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
-      const scrollTop =
+      var scrollTop =
           document.documentElement.scrollTop || document.body.scrollTop;
       //变量windowHeight是可视区的高度
-      const windowHeight =
+      var windowHeight =
           document.documentElement.clientHeight || document.body.clientHeight;
       //变量scrollHeight是滚动条的总高度
-      const scrollHeight =
+      var scrollHeight =
           document.documentElement.scrollHeight || document.body.scrollHeight;
       //滚动条到底部的条件
-      if (Math.round(scrollTop) + windowHeight === scrollHeight)
+      if (Math.round(scrollTop) + windowHeight == scrollHeight)
       {
         //写后台加载数据的函数
         console.log("到顶部", total.value, goodList.value.length);
@@ -192,8 +234,8 @@ export default defineComponent({
       }
 
       // 搜索框吸顶效果
-      console.log(scrollTop, windowHeight, scrollHeight);
-      if (scrollTop >= 35)
+      // console.log(scrollTop);
+      if (Math.round(scrollTop) >= 35)
       {
         fixed.value = "search-fixed";
       } else
@@ -206,9 +248,11 @@ export default defineComponent({
       carouselList,
       total,
       fixed,
+      keywords,
       goodList,
+      goGoodListPage,
+      inputSearchChange,
       goGoodDetail,
-      goCarouselDetail,
       getGoodList,
       getClassifyList,
       getCarouselList,
