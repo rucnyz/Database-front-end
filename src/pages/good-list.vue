@@ -48,7 +48,7 @@
               class="item"
               v-for="(item, index) in goodList"
               :key="index"
-              @click="goGoodDetail(item)"
+              @click="goGoodsDetail(item)"
           >
             <div class="good-img">
               <img :src="item.product_pic" alt=""/>
@@ -83,7 +83,7 @@ export default defineComponent({
     const route = useRoute();
 
     // 去商品详情
-    function goGoodDetail()
+    function goGoodsDetail()
     {
     }
 
@@ -184,7 +184,7 @@ export default defineComponent({
       inputSearchChange,
       goodList,
       getRouter,
-      goGoodDetail,
+      goGoodsDetail,
       getGoodListInfo,
       getGoodList,
     };

@@ -28,7 +28,6 @@
 <!--suppress JSPotentiallyInvalidConstructorUsage -->
 <script setup lang="ts">
 import {ref, inject} from 'vue'
-import jsSHA from "jssha"
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 import {getEncrypt} from '../api'
