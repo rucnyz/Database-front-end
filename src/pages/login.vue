@@ -70,7 +70,12 @@ function postLoginInfo(): void {
     if (data.statusCode == "successful") {
       // 判断是否可以登录
       // 设置数据
-      localStorage.customer_ID = data["ID"];
+      localStorage.customer_infl = JSON.stringify({
+        ID: data["ID"],
+        nickName: data["nickName"],
+        addressName: data["addressName"],
+        phoneNumber: data["phoneNumber"]
+      });
       router.push({
         path: '/home'
       })
