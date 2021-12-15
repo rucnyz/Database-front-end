@@ -1,63 +1,35 @@
 <template>
-  <div class="header">
-    <div class="wid-con">
-      <div class="header-con">
-        <div class="flex" v-if="true">
-          <span class="text-f22e00 pointer" @click="goLogin()">亲，请登录</span>
-          <span class="pointer hover-f22e00" @click="goRegister()"
-          >免费注册</span
-          >
-        </div>
-        <div class="" v-else>
-          <span class="pointer">张三疯</span>
-          <span class="pointer hover-f22e00">退出</span>
-        </div>
-        <div class="pointer hover-f22e00 flex align-center">
-          <div class="cart-img">
-            <img src="../assets/common/cart.png" alt=""/>
-          </div>
-          <span @click="goCart()"> 购物车 </span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <n-grid class="header" :cols="12">
+    <n-gi span=4 class="header-search" :offset=4 >搜索框//TODO</n-gi>
+    <n-gi :offset=1>
+      <div @click="goLogin()" class="header-login">亲，请登录</div>
+    </n-gi>
+    <n-gi>
+      <div  @click="goRegister()" class="header-register">免费注册</div>
+    </n-gi>
+    <n-gi class="header-cart">
+      <div @click="goCart()"><img src="../assets/common/cart.png" alt=""/> 购物车 </div>
+    </n-gi>
+  </n-grid>
 </template>
 
-<script>
-import {defineComponent} from "vue";
+<script setup lang="ts">
 
-export default defineComponent({
-  name: "header",
-  setup()
-  {
-    function goCart()
-    {
-      this.$router.push({
-        path: "/cart",
-      });
-    }
+import { Router, useRouter } from 'vue-router'
+const router:Router = useRouter()
 
-    function goRegister()
-    {
-      this.$router.push({
-        path: "/register",
-      });
-    }
+function goCart():void{
+  router.push({path:"/cart"})
+}
 
-    function goLogin()
-    {
-      this.$router.push({
-        path: "/login",
-      });
-    }
+function goRegister():void{
+  router.push({path: "/register"});
+}
 
-    return {
-      goCart,
-      goRegister,
-      goLogin,
-    };
-  },
-});
+function goLogin():void{
+  router.push({path: "/login"});
+}
+
 </script>
 <style scoped lang="less">
 .header {
@@ -65,37 +37,52 @@ export default defineComponent({
   line-height: 35px;
   width: 100%;
   background-color: #f5f5f5;
-  border-bottom: 1px solid #eee;
+  border-bottom: 2px solid #eee;
+  font-size: small;
+}
 
-  .header-con {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 12px;
+.header-search {
+  border: 1px solid #FF1700;
+}
 
-    span {
-      margin-right: 20px;
-    }
+.header-login {
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  &:hover{
+    color: #FF1700;
+    cursor: pointer;
   }
 }
 
-.text-f22e00 {
-  color: #f22e00;
+.header-register {
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  &:hover{
+    color: #FF1700;
+    cursor: pointer;
+  }
 }
 
-.hover-f22e00:hover {
-  color: #f22e00;
-}
-
-.cart-img {
-  height: 100%;
-  margin-right: 4px;
-  display: flex;
-  align-items: center;
-
+.header-cart {  
   img {
+    vertical-align: text-bottom;
     width: 15px;
     height: 15px;
-    margin-top: -4px;
+  }
+
+  div {
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    &:hover{
+    color: #FF1700;
+    cursor: pointer;
+    }
   }
 }
 </style>

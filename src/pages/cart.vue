@@ -2,10 +2,9 @@
 
 </template>
 
-<script>
-export default {
-  name: "cart"
-}
+<script setup lang="ts">
+
+
 </script>
 
 <style scoped>

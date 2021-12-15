@@ -1,14 +1,8 @@
 import {createStore} from 'vuex'
+import Cusomter from './modules/customer'
 // 创建一个新的 store 实例
 export default createStore({
-    state() {
-        return {
-            count: 0
-        }
-    },
-    mutations: {
-        increment(state: { count: number }) {
-            state.count++
-        }
+    modules:{
+        Cusomter
     }
 })
