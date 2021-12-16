@@ -1,22 +1,25 @@
-const customer = {
-    namespaced: true,
-    state:()=>({
-        isLogged : false
-    }),
-    getters:{
-        
+const state = {
+    isLogged : false
+}
+const getters = {
+    
+}
+const mutations = {
+    LOGIN (state: { isLogged: boolean }){
+        state.isLogged = true
     },
-    mutations:{
-        LOGIN (state: { isLogged: boolean }){
-            state.isLogged = true
-        },
-        LOGOUT (state: { isLogged: boolean }){
-            state.isLogged = false
-        }
-    },
-    actions:{
-        
+    LOGOUT (state: { isLogged: boolean }){
+        state.isLogged = false
     }
 }
+const actions = {
+    
+}
 
-export default customer
+export default {
+    namespaced: true,
+    state,
+    getters,
+    mutations,
+    actions
+}

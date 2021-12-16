@@ -5,7 +5,7 @@ export default createRouter({
     'routes': [
         {
             path: "/",
-            redirect: "home"
+            redirect: "/supplier/login"
         },
         {
             path: "/test",
@@ -34,6 +34,10 @@ export default createRouter({
         {
             path: '/good-list',
             component: () => import("../pages/good-list.vue")
+        },
+        {
+            path: '/supplier/login',
+            component: () => import("@/pages/supplier/login.vue")
         }
     ]
 })

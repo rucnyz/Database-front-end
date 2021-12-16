@@ -19,13 +19,14 @@ import {
     NInputGroup,
     NCarousel,
     NGrid,
-    NGridItem
-    
+    NGridItem,
+    NForm,
+    NFormItem
 } from 'naive-ui'
 
 const naive = create({
     components: [NButton, NPageHeader, NH2, NLayout, NSpace, NInput, NMessageProvider,
-        NCarousel, NInputGroup,NGrid,NGridItem]
+        NCarousel, NInputGroup,NGrid,NGridItem,NForm,NFormItem]
 })
 
 const app = createApp(App)
