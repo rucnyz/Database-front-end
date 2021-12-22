@@ -95,12 +95,6 @@ function postLoginInfo(): void {
                 phoneNumber: data["phoneNumber"],
               })
           );
-          // localStorage.customer_infl = JSON.stringify({
-          //   ID: data["ID"],
-          //   nickName: data["nickName"],
-          //   addressName: data["addressName"],
-          //   phoneNumber: data["phoneNumber"]
-          // });
           router.push({
             path: "/home",
           });

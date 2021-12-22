@@ -244,9 +244,13 @@ export default defineComponent({
           path: "/login",
         });
       }
-      userInfo.value = JSON.parse(isLogin);
-      getList();
-      getAddressList();
+      else
+      {
+        userInfo.value = JSON.parse(isLogin);
+        getList();
+        getAddressList();
+      }
+
     });
     return {
       delCart,
