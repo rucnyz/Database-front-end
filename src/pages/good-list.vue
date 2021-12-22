@@ -1,40 +1,38 @@
 <template>
   <div class="good">
     <div>
-      <Header/>
+      <Header />
       <!-- 搜索 -->
       <div class="wid-con section">
-        <div class="search">
+        <div class="search" >
           <n-input-group class="flex justify-center">
             <n-input
-                placeholder="请输入喜欢的宝贝"
-                v-model:value="keywords"
-                @input="inputSearchChange"
-                :style="{ width: '50%' }"
+              placeholder="请输入喜欢的宝贝"
+              v-model:value="keywords"
+              @input="inputSearchChange"
+              :style="{ width: '50%' }"
             />
             <n-button type="primary" @click="getGoodListInfo()" ghost
-            >搜索
-            </n-button
+              >搜索</n-button
             >
           </n-input-group>
         </div>
-        <div class="search search-fixed" v-if="fixed">
-          <n-input-group class="flex justify-center">
-            <n-input
-                placeholder="请输入喜欢的宝贝"
-                @input="inputSearchChange"
-                v-model="keywords"
-                :style="{ width: '50%' }"
-            />
-            <n-button type="primary" ghost @click="goGoodListPage()"
-            >搜索
-            </n-button
-            >
-          </n-input-group>
-        </div>
+          <div class="search search-fixed"  v-if="fixed">
+        <n-input-group class="flex justify-center">
+          <n-input
+            placeholder="请输入喜欢的宝贝"
+            @input="inputSearchChange"
+            v-model="keywords"
+            :style="{ width: '50%' }"
+          />
+          <n-button type="primary" ghost @click="goGoodListPage()"
+            >搜索</n-button
+          >
+        </n-input-group>
+      </div>
         <!-- 商品 -->
         <div
-            style="
+          style="
             margin-left: 20px;
             padding-top: 30px;
             font-size: 18px;
@@ -45,13 +43,13 @@
         </div>
         <div class="good-list flex flex-wrap" style="padding: 30px 0">
           <div
-              class="item"
-              v-for="(item, index) in goodList"
-              :key="index"
-              @click="goGoodsDetail(item)"
+            class="item"
+            v-for="(item, index) in goodList"
+            :key="index"
+            @click="goGoodDetail(item)"
           >
             <div class="good-img">
-              <img :src="item.product_pic" alt=""/>
+              <img :src="item.product_pic" alt="" />
             </div>
             <div class="text-cut-2 good-name">
               {{ item.product_name }}
@@ -59,36 +57,37 @@
             <div class="price">¥ {{ item.price }}</div>
           </div>
         </div>
-        <div
+          <div
             v-if="goodList.length >= total"
             style="text-align: center; margin: 30px auto"
-        >
-          没有更多数据
-        </div>
+          >
+            没有更多数据
+          </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script >
 import Header from "../components/header.vue";
-import {defineComponent, onMounted, ref} from "vue";
+import { defineComponent, ref, onMounted, getCurrentInstance } from "vue";
 import axios from "axios";
-import {useRoute} from "vue-router";
-
+import { useRoute,useRouter } from "vue-router";
 export default defineComponent({
-  components: {Header},
-  setup()
-  {
-    const route = useRoute();
-
+  components: { Header },
+  setup() {
+const route = useRoute();
+const router = useRouter();
     // 去商品详情
-    function goGoodsDetail()
-    {
+    function goGoodDetail(item) {
+       router.push({
+        path: "/good-detail",
+         query:{
+          id:item.ID
+        }
+      });
     }
-
-    onMounted(() =>
-    {
+    onMounted(() => {
       getRouter();
       getGoodList();
     });
@@ -96,83 +95,69 @@ export default defineComponent({
     const currentPage = ref(1);
     const total = ref(0);
     const fixed = ref("");
-
+ 
     const keywords = ref("");
     const category = ref("");
-    const getRouter = () =>
-    {
+   const getRouter = () => {
       console.log(route.query); // 路由信息
       let query = route.query
       keywords.value = query.keywords || ''
       category.value = query.category || ''
     };
-
-    function getGoodListInfo()
-    {
+    function getGoodListInfo() {
       currentPage.value = 1;
       goodList.value = [];
       getGoodList();
     }
-
-    function inputSearchChange(val)
-    {
+     function inputSearchChange(val) {
       keywords.value = val;
     }
-
     // 获取商品列表
-    function getGoodList()
-    {
+    function getGoodList() {
       axios
-          .get("/api/HomePage/getProductInCond", {
-            params: {
-              needNumber: 20,
-              page: currentPage.value,
-              keywords: keywords.value,
-              category: category.value,
-            },
-          })
-          .then((response) =>
-          {
-            console.log(response.data);
-            total.value = response.data.totalSize;
-            goodList.value = goodList.value.concat(response.data.detail);
-          })
-          .catch((error) =>
-          {
-            console.log(error);
-          });
+        .get("/api/HomePage/getProductInCond", {
+          params: {
+            needNumber: 20,
+            page: currentPage.value,
+            keywords: keywords.value,
+            category: category.value,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          total.value = response.data.totalSize;
+          let list = goodList.value.concat(response.data.detail);
+          goodList.value = list;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-
     // 判断是否到底部
-    window.onscroll = function ()
-    {
+    window.onscroll = function () {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
-      const scrollTop =
-          document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
       //变量windowHeight是可视区的高度
-      const windowHeight =
-          document.documentElement.clientHeight || document.body.clientHeight;
+      var windowHeight =
+        document.documentElement.clientHeight || document.body.clientHeight;
       //变量scrollHeight是滚动条的总高度
-      const scrollHeight =
-          document.documentElement.scrollHeight || document.body.scrollHeight;
+      var scrollHeight =
+        document.documentElement.scrollHeight || document.body.scrollHeight;
       //滚动条到底部的条件
-      if (Math.round(scrollTop) + windowHeight === scrollHeight)
-      {
+      if (Math.round(scrollTop) + windowHeight == scrollHeight) {
         //写后台加载数据的函数
         console.log("到顶部", total.value, goodList.value.length);
-        if (total.value > goodList.value.length)
-        {
+        if (total.value > goodList.value.length) {
           currentPage.value = currentPage.value + 1;
           getGoodList();
         }
       }
       // 搜索框吸顶效果
       //   console.log(scrollTop);
-      if (Math.round(scrollTop) >= 35)
-      {
+      if (Math.round(scrollTop) >= 35) {
         fixed.value = "search-fixed";
-      } else
-      {
+      }  else {
         fixed.value = "";
       }
     };
@@ -184,7 +169,7 @@ export default defineComponent({
       inputSearchChange,
       goodList,
       getRouter,
-      goGoodsDetail,
+      goGoodDetail,
       getGoodListInfo,
       getGoodList,
     };
@@ -200,7 +185,6 @@ export default defineComponent({
   width: 100%;
   z-index: 99999;
 }
-
 .search-fixed {
   position: fixed;
   background: #fff;
@@ -212,7 +196,6 @@ export default defineComponent({
 .good-list {
   height: 100%;
 }
-
 .item {
   border-radius: 10px;
   float: left;
@@ -224,23 +207,19 @@ export default defineComponent({
   position: relative;
   background: #f8f8f8;
   cursor: pointer;
-
   .good-img {
     border-radius: 15px;
     overflow: hidden;
   }
-
   .price {
     color: #f22e00;
     margin-top: 5px;
   }
 }
-
 .item:hover {
   background: #f1f1f1;
   box-shadow: 3px 3px 10px #f1f1f1;
 }
-
 .item:hover .good-name {
   color: #f22e00;
 }

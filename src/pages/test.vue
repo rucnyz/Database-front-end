@@ -5,15 +5,21 @@
 
 <script setup lang="ts">
 import {ref, inject} from 'vue'
-import {useMessage} from "naive-ui";
 
 const axios: any = inject("axios")
-const message = useMessage()
-message.info("hello")
+const message = ref("hello")
 
 function getList(): void {
-  console.log("clicked")
-  axios.post("/api/Test/test_db", {needNumber: 20})
+  axios.post("/api/test", {
+    "version": "0.1",
+    "test": "hello"
+  })
+      .then((response: { data: any; }) => {
+        console.log(response.data);
+        message.value = response.data;
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
 }
-
 </script>

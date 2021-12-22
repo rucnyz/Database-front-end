@@ -5,9 +5,11 @@
 
 <template>
   <div id="app">
-    <n-message-provider>
+     <n-message-provider>
+       <n-dialog-provider>
       <router-view></router-view>
-    </n-message-provider>
+      </n-dialog-provider>
+      </n-message-provider>
   </div>
 </template>
 

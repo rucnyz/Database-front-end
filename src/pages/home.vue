@@ -45,7 +45,7 @@
           <n-carousel autoplay show-arrow>
             <img
                 v-for="(item, index) in carouselList"
-                @click="goGoodsDetail(item)"
+                @click="goGoodDetail(item)"
                 :key="index"
                 class="carousel-img"
                 :src="item.product_pic"
@@ -69,7 +69,7 @@
             class="item"
             v-for="(item, index) in goodList"
             :key="index"
-            @click="goGoodsDetail(item)"
+            @click="goGoodDetail(item)"
         >
           <div class="good-img">
             <img :src="item.product_pic" alt=""/>
@@ -92,18 +92,26 @@
 
 <script>
 import Header from "../components/header.vue";
-import {defineComponent, onMounted, ref} from "vue";
+import {defineComponent, ref, onMounted} from "vue";
 import axios from "axios";
+import {useRouter} from "vue-router";
 
 export default defineComponent({
   components: {Header},
 
   setup()
   {
+    const router = useRouter();
 
     // 去商品详情
-    function goGoodsDetail()
+    function goGoodDetail(item)
     {
+      router.push({
+        path: "/good-detail",
+        query: {
+          id: item.ID
+        }
+      });
     }
 
     onMounted(() =>
@@ -130,7 +138,7 @@ export default defineComponent({
     function goGoodListPage(val = "")
     {
       console.log(keywords.value);
-      this.$router.push({
+      router.push({
         path: "/good-list",
         query: {
           keywords: keywords.value || "",
@@ -153,7 +161,8 @@ export default defineComponent({
           {
             console.log(response.data);
             total.value = response.data.totalSize;
-            goodList.value = goodList.value.concat(response.data.detail);
+            let list = goodList.value.concat(response.data.detail);
+            goodList.value = list;
           })
           .catch((error) =>
           {
@@ -199,7 +208,8 @@ export default defineComponent({
           .then((response) =>
           {
             console.log(response.data);
-            carouselList.value = response.data.detail;
+            let list = response.data.detail;
+            carouselList.value = list;
           })
           .catch((error) =>
           {
@@ -211,16 +221,16 @@ export default defineComponent({
     window.onscroll = function ()
     {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
-      const scrollTop =
+      var scrollTop =
           document.documentElement.scrollTop || document.body.scrollTop;
       //变量windowHeight是可视区的高度
-      const windowHeight =
+      var windowHeight =
           document.documentElement.clientHeight || document.body.clientHeight;
       //变量scrollHeight是滚动条的总高度
-      const scrollHeight =
+      var scrollHeight =
           document.documentElement.scrollHeight || document.body.scrollHeight;
       //滚动条到底部的条件
-      if (Math.round(scrollTop) + windowHeight === scrollHeight)
+      if (Math.round(scrollTop) + windowHeight == scrollHeight)
       {
         //写后台加载数据的函数
         console.log("到顶部", total.value, goodList.value.length);
@@ -250,7 +260,7 @@ export default defineComponent({
       goodList,
       goGoodListPage,
       inputSearchChange,
-      goGoodsDetail,
+      goGoodDetail,
       getGoodList,
       getClassifyList,
       getCarouselList,

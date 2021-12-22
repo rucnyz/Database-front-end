@@ -34,6 +34,18 @@ export default createRouter({
         {
             path: '/good-list',
             component: () => import("../pages/good-list.vue")
+        },
+        {
+            path: '/good-detail',
+            component: () => import("../pages/good-detail.vue")
+        },
+        {
+            path: '/order',
+            component: () => import("../pages/order.vue")
+        },
+        {
+            path: '/my',
+            component: () => import("../pages/my.vue")
         }
     ]
 })
