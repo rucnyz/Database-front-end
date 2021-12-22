@@ -4,6 +4,9 @@
             <n-form-item>
                 <n-h2>商家登陆</n-h2>
             </n-form-item>
+            <n-form-item>
+                <n-button @click="handleClick" attr-type="button">验证</n-button>
+            </n-form-item>
             <n-form-item label="用户名:">
                 <n-input v-model:value="logInfo.username" 
                         placeholder="请输入用户名" clearable></n-input>

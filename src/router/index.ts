@@ -36,8 +36,22 @@ export default createRouter({
             component: () => import("../pages/good-list.vue")
         },
         {
-            path: '/supplier/login',
-            component: () => import("@/pages/supplier/login.vue")
+            path: '/supplier',
+            component: () => import("@/pages/supplier/index.vue"),
+            children:[
+                {
+                    path: 'home',
+                    component: () => import("@/pages/supplier/home.vue")
+                },
+                {
+                    path: 'login',
+                    component: () => import("@/pages/supplier/login.vue")
+                },
+                {
+                    path: 'register',
+                    component: () => import("@/pages/supplier/register.vue")
+                }
+            ]
         }
     ]
 })
