@@ -190,8 +190,7 @@ export default defineComponent({
         router.push({
           path: "/login",
         });
-      }
-      else
+      } else
       {
         userInfo.value = JSON.parse(isLogin);
         getAddressList();
