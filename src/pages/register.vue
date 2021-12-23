@@ -58,13 +58,13 @@
   </n-space>
 </template>
 
-<!--suppress JSPotentiallyInvalidConstructorUsage -->
+
 <script setup lang="ts">
 import {ref, inject} from "vue";
-import jsSHA from "jssha";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 import {useMessage} from "naive-ui";
+import {getEncrypt} from "../api";
 
 const store = useStore(); // 获取vuex实例
 const router = useRouter(); // 获取router实例
@@ -79,8 +79,6 @@ const axios: any = inject("axios");
 const Login = ref("注册");
 // True为正在加载
 const loading = ref(false);
-// 使用SHA256加密
-const shaPassword = new jsSHA("SHA-256", "TEXT", {encoding: "UTF8"});
 
 // 信息提示
 const message = useMessage();
@@ -131,11 +129,9 @@ function postLoginInfo(): void {
   // 首先加载
   loading.value = !loading.value;
   // 进行加密
-  shaPassword.update(password.value);
-  console.log(shaPassword.getHash("HEX")); // 测试一下
   const info = {
     version: "0.1",
-    password: shaPassword.getHash("HEX"),
+    password: getEncrypt(password.value),
     realName: realName.value,
     nickName: nickName.value,
     phoneNumber: phoneNumber.value,

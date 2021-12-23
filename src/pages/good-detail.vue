@@ -72,7 +72,7 @@
         </div>
         <div style="margin: 20px 0">商品评论</div>
         <div class="comment-list">
-          <n-empty v-if="commentList.length == 0" description="没有评论">
+          <n-empty v-if="commentList.length === 0" description="没有评论">
           </n-empty>
           <div
               class="coment-item"
@@ -177,7 +177,7 @@ export default defineComponent({
       var scrollHeight =
           document.documentElement.scrollHeight || document.body.scrollHeight;
       //滚动条到底部的条件
-      if (Math.round(scrollTop) + windowHeight == scrollHeight)
+      if (Math.round(scrollTop) + windowHeight === scrollHeight)
       {
         //写后台加载数据的函数
         console.log("到顶部", total.value, commentList.value.length);

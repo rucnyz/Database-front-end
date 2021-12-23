@@ -28,7 +28,7 @@
       </div>
       <div style="margin: 30px">
         <n-card title="">
-          <n-empty v-if="list.length == 0" description="购物车什么也没有">
+          <n-empty v-if="list.length === 0" description="购物车什么也没有">
             <template #extra>
               <n-button size="small" @click="goHome()">去挑选商品</n-button>
             </template>
@@ -226,7 +226,7 @@ export default defineComponent({
           arr.push(item);
         }
       });
-      if (arr.length == 0)
+      if (arr.length === 0)
       {
         message.error("请选择商品！");
         return false;
@@ -243,8 +243,7 @@ export default defineComponent({
         router.push({
           path: "/login",
         });
-      }
-      else
+      } else
       {
         userInfo.value = JSON.parse(isLogin);
         getList();
