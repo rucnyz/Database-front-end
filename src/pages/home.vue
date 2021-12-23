@@ -94,16 +94,24 @@
 import Header from "../components/header.vue";
 import {defineComponent, ref, onMounted} from "vue";
 import axios from "axios";
+import {useRouter} from "vue-router";
 
 export default defineComponent({
   components: {Header},
 
   setup()
   {
+    const router = useRouter();
 
     // 去商品详情
-    function goGoodDetail()
+    function goGoodDetail(item)
     {
+      router.push({
+        path: "/good-detail",
+        query: {
+          id: item.ID
+        }
+      });
     }
 
     onMounted(() =>
@@ -130,7 +138,7 @@ export default defineComponent({
     function goGoodListPage(val = "")
     {
       console.log(keywords.value);
-      this.$router.push({
+      router.push({
         path: "/good-list",
         query: {
           keywords: keywords.value || "",

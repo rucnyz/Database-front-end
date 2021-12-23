@@ -1,35 +1,109 @@
 <template>
-  <n-grid class="header" :cols="12">
-    <n-gi span=4 class="header-search" :offset=4 >搜索框//TODO</n-gi>
-    <n-gi :offset=1>
-      <div @click="goLogin()" class="header-login">亲，请登录</div>
-    </n-gi>
-    <n-gi>
-      <div  @click="goRegister()" class="header-register">免费注册</div>
-    </n-gi>
-    <n-gi class="header-cart">
-      <div @click="goCart()"><img src="../assets/common/cart.png" alt=""/> 购物车 </div>
-    </n-gi>
-  </n-grid>
+  <div class="header">
+    <div class="wid-con">
+      <div class="header-con">
+        <div class="flex" v-if="!customer_infl">
+          <span class="text-f22e00 pointer" @click="goLogin()">亲，请登录</span>
+          <span class="pointer hover-f22e00" @click="goRegister()"
+          >免费注册</span
+          >
+        </div>
+        <div class="" v-else>
+          <span class="pointer text-f22e00 hover-f22e00" @click="goMyPage()">{{
+              customer_infl.nickName
+            }}</span>
+          <span class="pointer hover-f22e00" @click="goOut()">退出</span>
+        </div>
+        <div class="pointer hover-f22e00 flex align-center" @click="goCart()">
+          <div class="cart-img">
+            <img src="../assets/common/cart.png" alt=""/>
+          </div>
+          <span> 购物车 </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup lang="ts">
+<script>
+import {defineComponent, ref, onMounted} from "vue";
+import {useMessage} from "naive-ui";
+import {useRouter} from "vue-router";
 
-import { Router, useRouter } from 'vue-router'
-const router:Router = useRouter()
+export default defineComponent({
+  name: "header",
+  setup()
+  {
+    const message = useMessage();
+    const router = useRouter();
+    let customer_infl = ref("");
+    onMounted(() =>
+    {
+      let customer_infl_storage = localStorage.getItem("customer_infl") || "";
+      // console.log(customer_infl_storage, 111);
+      if (customer_infl_storage)
+      {
+        customer_infl.value = JSON.parse(customer_infl_storage);
+      }
+    });
 
-function goCart():void{
-  router.push({path:"/cart"})
-}
+    function goOut()
+    {
+      message.success("退出成功");
+      localStorage.setItem("customer_infl", "");
+      setTimeout(() =>
+      {
+        window.location.reload();
+      }, 500);
+    }
 
-function goRegister():void{
-  router.push({path: "/register"});
-}
+    function goCart()
+    {
+      if (customer_infl.value)
+      {
+        router.push({
+          path: "/cart",
+        });
+      } else
+      {
+        message.warning("请先登录！");
+        router.push({
+          path: "/login",
+        });
+      }
+    }
 
-function goLogin():void{
-  router.push({path: "/login"});
-}
+    function goRegister()
+    {
+      router.push({
+        path: "/register",
+      });
+    }
 
+    function goLogin()
+    {
+      router.push({
+        path: "/login",
+      });
+    }
+
+    function goMyPage()
+    {
+      router.push({
+        path: "/my",
+      });
+    }
+
+    return {
+      customer_infl,
+      goCart,
+      goRegister,
+      goLogin,
+      goOut,
+      goMyPage,
+    };
+  },
+});
 </script>
 <style scoped lang="less">
 .header {

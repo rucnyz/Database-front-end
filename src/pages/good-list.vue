@@ -5,6 +5,12 @@
       <!-- 搜索 -->
       <div class="wid-con section">
         <div class="search">
+          <span
+              @click="goHome()"
+              class="pointer"
+              style="color: #2080f0; float: right"
+          >返回主页</span
+          >
           <n-input-group class="flex justify-center">
             <n-input
                 placeholder="请输入喜欢的宝贝"
@@ -74,17 +80,24 @@
 import Header from "../components/header.vue";
 import {defineComponent, ref, onMounted, getCurrentInstance} from "vue";
 import axios from "axios";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 export default defineComponent({
   components: {Header},
   setup()
   {
     const route = useRoute();
+    const router = useRouter();
 
     // 去商品详情
-    function goGoodDetail()
+    function goGoodDetail(item)
     {
+      router.push({
+        path: "/good-detail",
+        query: {
+          id: item.ID
+        }
+      });
     }
 
     onMounted(() =>
@@ -144,6 +157,12 @@ export default defineComponent({
           });
     }
 
+    const goHome = () =>
+    {
+      router.push({
+        path: "/home",
+      });
+    };
     // 判断是否到底部
     window.onscroll = function ()
     {
@@ -183,6 +202,7 @@ export default defineComponent({
       category,
       total,
       inputSearchChange,
+      goHome,
       goodList,
       getRouter,
       goGoodDetail,

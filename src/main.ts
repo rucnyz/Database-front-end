@@ -1,4 +1,4 @@
-import {createApp} from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
@@ -21,12 +21,23 @@ import {
     NGrid,
     NGridItem,
     NForm,
-    NFormItem
+    NFormItem,
+    NSelect,
+    NCard,
+    NEmpty,
+    NDialogProvider,
+    NCheckbox,
+    NInputNumber,
+    NPopconfirm,
+    NModal,
+    NRadio,
+    NRadioGroup
 } from 'naive-ui'
 
 const naive = create({
     components: [NButton, NPageHeader, NH2, NLayout, NSpace, NInput, NMessageProvider,
-        NCarousel, NInputGroup,NGrid,NGridItem,NForm,NFormItem]
+        NCarousel, NInputGroup, NGrid, NGridItem, NForm, NFormItem, NSelect, NCard, NEmpty,
+        NDialogProvider, NCheckbox, NPopconfirm, NInputNumber, NModal, NRadio, NRadioGroup]
 })
 
 const app = createApp(App)

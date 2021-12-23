@@ -36,6 +36,22 @@ export default createRouter({
             component: () => import("../pages/good-list.vue")
         },
         {
+            path: '/good-detail',
+            component: () => import("../pages/good-detail.vue")
+        },
+        {
+            path: '/order',
+            component: () => import("../pages/order.vue")
+        },
+        {
+            path: '/my',
+            component: () => import("../pages/my.vue")
+        },
+        {
+            path: '/affirm-order',
+            component: () => import("../pages/affirm-order.vue")
+        },
+        {
             path: '/supplier',
             component: () => import("@/pages/supplier/index.vue"),
             children:[
@@ -53,5 +69,6 @@ export default createRouter({
                 }
             ]
         }
+
     ]
 })

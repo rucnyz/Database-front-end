@@ -1,6 +1,7 @@
 <template>
   <n-space>
     <div class="container">
+      <div class="goback" @click="goHome()">返回主页</div>
       <div class="login-info">
         <section class="title">
           <h2>{{ Login }}</h2>
@@ -19,7 +20,7 @@
             <n-input
                 v-model="phoneNumber"
                 clearable
-                placeholder="请输入手机号"
+                placeholder="请输入手机号（将会被作为账号）"
                 @input="onInputphoneNumber"
             ></n-input>
           </p>
@@ -43,7 +44,7 @@
         </section>
 
         <!-- 提交区 -->
-        <section class="submit-area margin-top-twenty">
+        <section class="submit-area margin-top-twenty" style="margin-top: 20px">
           <n-button
               :loading="loading"
               type="primary"
@@ -53,6 +54,11 @@
           </n-button
           >
         </section>
+        <div style="margin-top: 10px; text-align: right">
+          已有账号，<span class="pointer hover-f22e00" @click="goLogin()"
+        >去登录</span
+        >
+        </div>
       </div>
     </div>
   </n-space>
@@ -61,11 +67,10 @@
 <!--suppress JSPotentiallyInvalidConstructorUsage -->
 <script setup lang="ts">
 import {ref, inject} from "vue";
-import jsSHA from "jssha";
+import {getEncrypt} from "../api";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 import {useMessage} from "naive-ui";
-import {getEncrypt} from '../api/index'
 
 const store = useStore(); // 获取vuex实例
 const router = useRouter(); // 获取router实例
@@ -80,26 +85,41 @@ const axios: any = inject("axios");
 const Login = ref("注册");
 // True为正在加载
 const loading = ref(false);
+
 // 使用SHA256加密
-const shaPassword = new jsSHA("SHA-256", "TEXT", {encoding: "UTF8"});
+function goLogin() {
+  router.push({
+    path: "/login",
+  });
+}
+
+function goHome() {
+  router.push({
+    path: "/home",
+  });
+}
 
 // 信息提示
 const message = useMessage();
 
 function onInputrealName(e: string) {
-  realName.value = e
+  console.log(e);
+  realName.value = e;
 }
 
 function onInputphoneNumber(e: string) {
-  phoneNumber.value = e
+  console.log(e);
+  phoneNumber.value = e;
 }
 
 function onInputnickName(e: string) {
-  nickName.value = e
+  console.log(e);
+  nickName.value = e;
 }
 
 function onInputpassword(e: string) {
-  password.value = e
+  console.log(e);
+  password.value = e;
 }
 
 // 用于传递信息给后端，当点击登录按钮触发
@@ -114,7 +134,7 @@ function postLoginInfo(): void {
     return;
   }
   if (!regPhone.test(phoneNumber.value)) {
-    message.warning("请输入11位正确的手机号");
+    message.warning("请输入11位正确的手机号（将会被作为账号）");
     return;
   }
   if (!regName.test(nickName.value)) {
@@ -138,7 +158,7 @@ function postLoginInfo(): void {
   // 传递过去
   axios
       .post("/api/customer/register", info)
-      .then((response: { data: any }) => {
+      .then((response: { data: any; }) => {
         loading.value = !loading.value;
         console.log(response.data);
         let data = response.data;
@@ -151,6 +171,8 @@ function postLoginInfo(): void {
               path: "/login",
             });
           }, 500);
+        } else {
+          message.info(data.message);
         }
       })
       .catch((error: any) => {
@@ -168,7 +190,7 @@ function postLoginInfo(): void {
 .container {
   width: 100vw;
   height: 100vh;
-  background-image: url("@/assets/img/background.jpeg");
+  background-image: url("../../public/img/background.jpeg");
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
@@ -214,5 +236,21 @@ function postLoginInfo(): void {
       align-items: center;
     }
   }
+}
+
+.hover-f22e00:hover {
+  color: #f22e00;
+}
+
+.hover-f22e00 {
+  color: #e93e17;
+}
+
+.goback {
+  position: fixed;
+  top: 30px;
+  left: 60px;
+  color: rgb(32, 128, 240);
+  cursor: pointer;
 }
 </style>
