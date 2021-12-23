@@ -40,7 +40,7 @@
   </div>
 </template>
 
-<!--suppress JSPotentiallyInvalidConstructorUsage -->
+
 <script setup lang="ts">
 import {ref, inject} from "vue";
 import {useRouter} from "vue-router";

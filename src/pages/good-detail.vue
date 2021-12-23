@@ -93,10 +93,10 @@
   </div>
 </template>
 <script>
-import {defineComponent, ref, onMounted, watch} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import Header from "../components/header.vue";
 import {useMessage} from "naive-ui";
-import {useRouter, useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {getCurrentUserInfo} from "../utils";
 import axios from "axios";
 
@@ -202,8 +202,7 @@ export default defineComponent({
           {
             console.log(response.data);
             total.value = response.data.totalSize;
-            let list = commentList.value.concat(response.data.comments);
-            commentList.value = list;
+            commentList.value = commentList.value.concat(response.data.comments);
           })
           .catch((error) =>
           {
