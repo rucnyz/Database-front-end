@@ -1,6 +1,6 @@
 <template>
-    <div class="supplier_login_container">
-        <n-form class="supplier_login_info">
+    <div class="supplier_register_container">
+        <n-form class="supplier_register_info">
             <n-form-item>
                 <n-h2>商家注册</n-h2>
             </n-form-item>
@@ -48,7 +48,7 @@ function handleClick(){
                                             'supplierName':registerInfo.supplier_name})
         .then((response:{data:any})=>{
             if(response.data == "successful"){
-                router.push("supplier/login")
+                router.push("supplier/register")
             }
         })
         .catch((err:any)=>{console.log(err)})
@@ -56,5 +56,12 @@ function handleClick(){
 </script>
 
 <style lang="less">
-
+.supplier_register_container{
+    width: 25%;
+    height: 30%;
+    margin-left: 35%;
+    margin-top: 8%;
+    margin-bottom: 0%;
+    
+}
 </style>

@@ -5,7 +5,9 @@
                 <n-h2>商家登陆</n-h2>
             </n-form-item>
             <n-form-item>
-                <n-button @click="handleClick" attr-type="button">验证</n-button>
+                <n-button @click="toRegister" 
+                            class="supplier_login_to_reg" 
+                            label-align='right'>注册</n-button>
             </n-form-item>
             <n-form-item label="用户名:">
                 <n-input v-model:value="logInfo.username" 
@@ -16,7 +18,7 @@
                         placeholder="请输入密码" clearable></n-input>
             </n-form-item>
             <n-form-item>
-                <n-button @click="handleClick" attr-type="button">验证</n-button>
+                <n-button @click="login" attr-type="button">登陆</n-button>
             </n-form-item>
         </n-form>
     </div>
@@ -25,7 +27,9 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import router from '@/router';
 const loginStore = useStore()
 
 const logInfo = reactive({
@@ -33,8 +37,12 @@ const logInfo = reactive({
     password: "",
 })
 
-function handleClick(){
+function login(){
     loginStore.dispatch("supplier/login",{id:logInfo.username,passwd:logInfo.password})
+}
+
+function toRegister(){
+    router.push("/supplier/register")
 }
 
 </script>
@@ -42,11 +50,15 @@ function handleClick(){
 <style lang="less">
 .supplier_login_container{
     width: 25%;
-    height: 20%;
+    height: 30%;
     margin-left: 35%;
-    margin-top: 15%;
+    margin-top: 10%;
     margin-bottom: 0%;
     
+}
+
+.supplier_login_to_reg{
+    border:0px
 }
 // .supplier_login_info {
 //     n-form-item{
