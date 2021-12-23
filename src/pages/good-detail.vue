@@ -1,20 +1,20 @@
 <template>
   <div>
-    <Header />
+    <Header/>
     <div class="wid-con section" style="padding-bottom: 30px">
       <div style="margin: 30px">
         <div style="margin: 20px 0">
           商品详情
           <span
-            @click="goHome()"
-            class="pointer"
-            style="color: #2080f0; float: right"
-            >返回主页</span
+              @click="goHome()"
+              class="pointer"
+              style="color: #2080f0; float: right"
+          >返回主页</span
           >
         </div>
         <div class="good-info">
           <div class="good-img">
-            <img :src="info.pic_url" alt="" />
+            <img :src="info.pic_url" alt=""/>
           </div>
           <div style="flex: 1" class="_right">
             <div class="good-name">
@@ -47,24 +47,26 @@
               <div></div>
               <div>
                 <n-input-number
-                  placeholder=""
-                  v-model:value="num"
-                  @input="handleChangeNUmber($event)"
-                  @change="handleChangeNUmberBtn($event)"
-                  min="1"
+                    placeholder=""
+                    v-model:value="num"
+                    @input="handleChangeNUmber($event)"
+                    @change="handleChangeNUmberBtn($event)"
+                    min="1"
                 />
               </div>
             </div>
             <div class="good-manage">
               <n-button
-                type="warning"
-                size="small"
-                style="margin-right: 10px"
-                @click="goPay"
-                >立即购买</n-button
+                  type="warning"
+                  size="small"
+                  style="margin-right: 10px"
+                  @click="goPay"
+              >立即购买
+              </n-button
               >
               <n-button type="error" size="small" @click="goCart"
-                >加入购物车</n-button
+              >加入购物车
+              </n-button
               >
             </div>
           </div>
@@ -74,16 +76,16 @@
           <n-empty v-if="commentList.length == 0" description="没有评论">
           </n-empty>
           <div
-            class="coment-item"
-            v-for="(item, index) in commentList"
-            :key="index"
+              class="coment-item"
+              v-for="(item, index) in commentList"
+              :key="index"
           >
             <div>
               评论人：{{ item.nickname }}
               <span style="margin-left: 20px">评论时间：{{ item.date }}</span>
             </div>
             <div
-              style="
+                style="
                 margin: 10px;
                 color: #666;
                 padding: 30px 15px;
@@ -108,9 +110,10 @@ import {getCurrentUserInfo} from "../utils";
 import axios from "axios";
 
 export default defineComponent({
-  components: { Header },
+  components: {Header},
   name: "good-detail",
-  setup() {
+  setup()
+  {
     const router = useRouter();
     const route = useRoute();
     const message = useMessage();
@@ -127,87 +130,112 @@ export default defineComponent({
       size: "",
       category: "",
     });
-    onMounted(() => {
+    onMounted(() =>
+    {
       console.log(route.query.id);
       id.value = route.query.id;
       // 判断是否登录
       let isLogin = getCurrentUserInfo();
-      if (isLogin) {
+      if (isLogin)
+      {
         userInfo.value = JSON.parse(isLogin);
       }
       getGoodsInfo();
       getCommentList();
     });
-    function getGoodsInfo() {
+
+    function getGoodsInfo()
+    {
       axios
-        .get(`/api/product/${id.value}`, {})
-        .then((response) => {
-          console.log(response, "获取数据");
-          info.value = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .get(`/api/product/${id.value}`, {})
+          .then((response) =>
+          {
+            console.log(response, "获取数据");
+            info.value = response.data;
+          })
+          .catch((error) =>
+          {
+            console.log(error);
+          });
     }
-    function goHome() {
+
+    function goHome()
+    {
       router.push({
         path: "/home",
       });
     }
-    window.onscroll = function () {
+
+    window.onscroll = function ()
+    {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
       var scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
+          document.documentElement.scrollTop || document.body.scrollTop;
       //变量windowHeight是可视区的高度
       var windowHeight =
-        document.documentElement.clientHeight || document.body.clientHeight;
+          document.documentElement.clientHeight || document.body.clientHeight;
       //变量scrollHeight是滚动条的总高度
       var scrollHeight =
-        document.documentElement.scrollHeight || document.body.scrollHeight;
+          document.documentElement.scrollHeight || document.body.scrollHeight;
       //滚动条到底部的条件
-      if (Math.round(scrollTop) + windowHeight === scrollHeight) {
+      if (Math.round(scrollTop) + windowHeight === scrollHeight)
+      {
         //写后台加载数据的函数
         console.log("到顶部", total.value, commentList.value.length);
-        if (total.value > commentList.value.length) {
+        if (total.value > commentList.value.length)
+        {
           currentPage.value = currentPage.value + 1;
           getCommentList();
         }
       }
     };
-    function getCommentList() {
+
+    function getCommentList()
+    {
       axios
-        .get(`/api/product/${id.value}/allcomments`, {
-          params: {
-            needNumber: 20,
-            page: currentPage.value,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          total.value = response.data.totalSize;
-          commentList.value = commentList.value.concat(response.data.comments);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .get(`/api/product/${id.value}/allcomments`, {
+            params: {
+              needNumber: 20,
+              page: currentPage.value,
+            },
+          })
+          .then((response) =>
+          {
+            console.log(response.data);
+            total.value = response.data.totalSize;
+            commentList.value = commentList.value.concat(response.data.comments);
+          })
+          .catch((error) =>
+          {
+            console.log(error);
+          });
     }
+
     // 修改数量
-    function handleChangeNUmber(val) {
+    function handleChangeNUmber(val)
+    {
       console.log(val.target.value);
       num.value = val.target.value;
     }
-    function handleChangeNUmberBtn(val) {
+
+    function handleChangeNUmberBtn(val)
+    {
       console.log(val);
       num.value = val;
     }
-    function radioChange(val) {
+
+    function radioChange(val)
+    {
       console.log(val.target.value);
       sizeVal.value = val.target.value;
     }
-    function goPay() {
+
+    function goPay()
+    {
       if (!num.value) return message.error("请选择数量");
       let isLogin = getCurrentUserInfo();
-      if (!isLogin) {
+      if (!isLogin)
+      {
         message.warning("请先登录！");
         return false;
       }
@@ -215,7 +243,7 @@ export default defineComponent({
         isCart: 0,
         list: [
           {
-            productID:id.value,
+            productID: id.value,
             ...info.value,
             count: num.value,
             picUrl: info.value.pic_url,
@@ -227,31 +255,39 @@ export default defineComponent({
         path: "/affirm-order",
       });
     }
+
     // 加入购物车
-    function goCart() {
+    function goCart()
+    {
       if (!num.value) return message.error("请选择数量");
       let isLogin = getCurrentUserInfo();
-      if (!isLogin) {
+      if (!isLogin)
+      {
         message.warning("请先登录！");
         return false;
       }
       axios
-        .post(`/api/customer/${userInfo.value.ID}/shoppingCart/add`, {
-          productID: id.value,
-          count: num.value,
-        })
-        .then((response) => {
-          console.log(response, "获取数据");
-          if (response.data.statusCode === "successful") {
-            message.info("成功加入购物车");
-          } else {
-            message.info(response.data.message);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .post(`/api/customer/${userInfo.value.ID}/shoppingCart/add`, {
+            productID: id.value,
+            count: num.value,
+          })
+          .then((response) =>
+          {
+            console.log(response, "获取数据");
+            if (response.data.statusCode === "successful")
+            {
+              message.info("成功加入购物车");
+            } else
+            {
+              message.info(response.data.message);
+            }
+          })
+          .catch((error) =>
+          {
+            console.log(error);
+          });
     }
+
     return {
       userInfo,
       total,
@@ -277,30 +313,36 @@ export default defineComponent({
   display: flex;
   margin-left: 10px;
   padding: 10px 0;
+
   .good-img {
     width: 240px;
     height: 240px;
     border-radius: 10px;
     margin-right: 10px;
+
     img {
       width: 100%;
       height: 100%;
     }
   }
 }
+
 .price {
   color: #f22e00;
   margin-top: 5px;
 }
+
 .good-manage {
   display: flex;
   justify-content: flex-end;
 }
+
 ._right {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .coment-item {
   margin: 20px 0;
   padding: 10px 0;

@@ -1,9 +1,9 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 import "./style/index.less";
 import {
     // create naive ui
@@ -29,10 +29,11 @@ import {
     NRadio,
     NRadioGroup
 } from 'naive-ui'
+
 const naive = create({
     components: [NButton, NPageHeader, NH2, NLayout, NSpace, NInput, NMessageProvider,
         NCarousel, NInputGroup, NSelect, NCard, NEmpty, NDialogProvider, NCheckbox,
-        NPopconfirm, NInputNumber, NModal,NRadio,NRadioGroup]
+        NPopconfirm, NInputNumber, NModal, NRadio, NRadioGroup]
 })
 // 创建一个新的 store 实例
 const store = createStore({

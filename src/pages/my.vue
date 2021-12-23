@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Header />
+    <Header/>
     <div class="wid-con section" style="padding-bottom: 30px">
       <div style="margin: 30px">
         <div style="margin: 20px 0">
           个人信息
           <span
-            @click="goHome()"
-            class="pointer"
-            style="color: #2080f0; float: right"
-            >返回主页</span
+              @click="goHome()"
+              class="pointer"
+              style="color: #2080f0; float: right"
+          >返回主页</span
           >
         </div>
         <n-card>
@@ -21,24 +21,24 @@
             <span>昵称: </span>
             <span v-if="!isEdit">{{ userInfo.nickName }} </span>
             <n-input
-              style="width: 300px; margin-left: 10px"
-              v-model:value="nickName"
-              size="small"
-              placeholder="请输入收货人姓名"
-              @input="onInputNickName"
-              v-else
+                style="width: 300px; margin-left: 10px"
+                v-model:value="nickName"
+                size="small"
+                placeholder="请输入收货人姓名"
+                @input="onInputNickName"
+                v-else
             ></n-input>
           </div>
           <div class="info-item">
             <span>手机号: </span>
             <span v-if="!isEdit">{{ userInfo.phoneNumber }} </span>
             <n-input
-              style="width: 300px; margin-left: 10px"
-              v-model:value="phoneNumber"
-              size="small"
-              placeholder="请输入收货人姓名"
-              @input="onInputPhoneNumber"
-              v-else
+                style="width: 300px; margin-left: 10px"
+                v-model:value="phoneNumber"
+                size="small"
+                placeholder="请输入收货人姓名"
+                @input="onInputPhoneNumber"
+                v-else
             ></n-input>
           </div>
           <!-- <div class="info-item">
@@ -61,7 +61,7 @@
           </div> -->
           <div style="text-align: right">
             <span @click="goOrder()" class="pointer" style="color: #2080f0"
-              >我的订单</span
+            >我的订单</span
             >
           </div>
         </n-card>
@@ -70,9 +70,9 @@
           <n-card>
             <div class="address-list">
               <div
-                class="address-item"
-                v-for="(item, index) in addressList"
-                :key="index"
+                  class="address-item"
+                  v-for="(item, index) in addressList"
+                  :key="index"
               >
                 <div style="flex: 1">
                   <div>{{ item.nickName }} {{ item.phoneNumber }}</div>
@@ -80,16 +80,16 @@
                 </div>
                 <div>
                   <n-button
-                    type="primary"
-                    style="margin-right: 10px"
-                    @click="edit(item)"
-                    >修改
+                      type="primary"
+                      style="margin-right: 10px"
+                      @click="edit(item)"
+                  >修改
                   </n-button>
 
                   <n-popconfirm
-                    positive-text="确定"
-                    negative-text="取消"
-                    @positive-click="handlePositiveClick(item)"
+                      positive-text="确定"
+                      negative-text="取消"
+                      @positive-click="handlePositiveClick(item)"
                   >
                     <template #trigger>
                       <n-button>删除</n-button>
@@ -99,8 +99,8 @@
                 </div>
               </div>
               <n-empty
-                v-if="addressList.length === 0"
-                description="你还没有地址"
+                  v-if="addressList.length === 0"
+                  description="你还没有地址"
               >
               </n-empty>
               <div class="add">
@@ -112,23 +112,23 @@
       </div>
     </div>
     <n-modal
-      v-model:show="showModal"
-      preset="dialog"
-      :title="id ? '编辑地址' : '新增地址'"
+        v-model:show="showModal"
+        preset="dialog"
+        :title="id ? '编辑地址' : '新增地址'"
     >
       <div style="margin-top: 20px">
         <p class="one-item">
           <n-input
-            v-model:value="name"
-            placeholder="请输入收货人姓名"
-            @input="onInputName"
+              v-model:value="name"
+              placeholder="请输入收货人姓名"
+              @input="onInputName"
           ></n-input>
         </p>
         <p class="one-item">
           <n-input
-            v-model:value="phone"
-            placeholder="请输入手机号"
-            @input="onInputPhone"
+              v-model:value="phone"
+              placeholder="请输入手机号"
+              @input="onInputPhone"
           ></n-input>
         </p>
         <p class="one-item">
@@ -146,11 +146,11 @@
             @input="onInputAddress"
             v-else
           ></n-input> -->
-           <n-input
-            v-model:value="address"
-            clearable
-            placeholder="请输入收货地址"
-            @input="onInputAddress"
+          <n-input
+              v-model:value="address"
+              clearable
+              placeholder="请输入收货地址"
+              @input="onInputAddress"
           ></n-input>
         </p>
       </div>
@@ -162,16 +162,18 @@
   </div>
 </template>
 <script>
-import { defineComponent, ref, onMounted, watch } from "vue";
+import {defineComponent, ref, onMounted, watch} from "vue";
 import Header from "../components/header.vue";
-import { useMessage } from "naive-ui";
-import { useRouter } from "vue-router";
-import { getCurrentUserInfo } from "../utils";
+import {useMessage} from "naive-ui";
+import {useRouter} from "vue-router";
+import {getCurrentUserInfo} from "../utils";
 import axios from "axios";
+
 export default defineComponent({
-  components: { Header },
+  components: {Header},
   name: "my",
-  setup() {
+  setup()
+  {
     const router = useRouter();
     const message = useMessage();
     let isEdit = ref(false);
@@ -185,10 +187,12 @@ export default defineComponent({
     let addressList = ref([]);
     let userInfo = ref({});
     let showModal = ref(false);
-    onMounted(() => {
+    onMounted(() =>
+    {
       // 判断是否登录
       let isLogin = getCurrentUserInfo();
-      if (!isLogin) {
+      if (!isLogin)
+      {
         message.warning("请先登录！");
         router.push({
           path: "/login",
@@ -201,77 +205,110 @@ export default defineComponent({
       // nickName.value = userInfo.value.nickName;
       // addressName.value = userInfo.value.addressName;
     });
-    function showUpd() {
+
+    function showUpd()
+    {
       isEdit.value = true;
     }
-    function onInputPhoneNumber(e) {
+
+    function onInputPhoneNumber(e)
+    {
       console.log(e);
       phoneNumber.value = e;
     }
-    function onInputAddressName(e) {
+
+    function onInputAddressName(e)
+    {
       console.log(e);
       addressName.value = e;
     }
-    function onInputNickName(e) {
+
+    function onInputNickName(e)
+    {
       console.log(e);
       nickName.value = e;
     }
-    function onInputName(e) {
+
+    function onInputName(e)
+    {
       console.log(e);
       name.value = e;
     }
-    function onInputPhone(e) {
+
+    function onInputPhone(e)
+    {
       console.log(e);
       phone.value = e;
     }
-    function onInputAddress(e) {
+
+    function onInputAddress(e)
+    {
       console.log(e);
       address.value = e;
     }
-    function handlePositiveClick(item) {
+
+    function handlePositiveClick(item)
+    {
       console.log(item);
       let url = `/api/customer/${userInfo.value.ID}/address/delete`;
       axios
-        .post(url, {
-          address: item.addressName,
-        })
-        .then((response) => {
-          if (response.data.statusCode === "successful") {
-            message.info("删除成功");
-            getAddressList();
-          } else {
-            message.info(response.data.message);
-          }
-        })
-        .catch((error) => {});
+          .post(url, {
+            address: item.addressName,
+          })
+          .then((response) =>
+          {
+            if (response.data.statusCode === "successful")
+            {
+              message.info("删除成功");
+              getAddressList();
+            } else
+            {
+              message.info(response.data.message);
+            }
+          })
+          .catch((error) =>
+          {
+          });
       // message.info("删除成功");
     }
+
     //获取地址列表
-    function getAddressList() {
+    function getAddressList()
+    {
       axios
-        .get(`/api/customer/${userInfo.value.ID}/info`, {})
-        .then((response) => {
-          console.log(response, "获取数据");
-          addressList.value = response.data.address;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .get(`/api/customer/${userInfo.value.ID}/info`, {})
+          .then((response) =>
+          {
+            console.log(response, "获取数据");
+            addressList.value = response.data.address;
+          })
+          .catch((error) =>
+          {
+            console.log(error);
+          });
     }
-    function goOrder() {
+
+    function goOrder()
+    {
       router.push({
         path: "/order",
       });
     }
-    function goHome() {
+
+    function goHome()
+    {
       router.push({
         path: "/home",
       });
     }
-    function hideModel() {
+
+    function hideModel()
+    {
       showModal.value = false;
     }
-    function add() {
+
+    function add()
+    {
       id.value = "";
       showModal.value = true;
       name.value = "";
@@ -279,86 +316,104 @@ export default defineComponent({
       address.value = "";
       console.log(111);
     }
-    function edit(item) {
+
+    function edit(item)
+    {
       id.value = item.id || 1;
       name.value = item.nickName;
       phone.value = item.phoneNumber;
       address.value = item.addressName;
       showModal.value = true;
     }
-    function sub() {
+
+    function sub()
+    {
       if (!name.value) return message.warning("请输入收货人姓名");
       if (!phone.value) return message.warning("请输入收货人手机号");
       if (!phone.value) return message.warning("请输入手机号");
       // 正则校验
       let regPhone = /^[1][3,4,5,6,7,8][0-9]{9}$/;
-      if (!regPhone.test(phone.value)) {
+      if (!regPhone.test(phone.value))
+      {
         message.warning("请输入11位正确的手机号");
         return false;
       }
       if (!address.value) return message.warning("请输入收货地址");
       let url = `/api/customer/${userInfo.value.ID}/address/update`;
-      if (!id.value) {
+      if (!id.value)
+      {
         url = `/api/customer/${userInfo.value.ID}/address/add`;
       }
       axios
-        .post(url, {
-          nickName: name.value,
-          phoneNumber: phone.value,
-          address: address.value,
-        })
-        .then((response) => {
-          if (response.data.statusCode == "successful") {
-            message.info("操作成功");
-            getAddressList();
-            showModal.value = false;
-          } else {
-            message.info(response.data.message);
-          }
-        })
-        .catch((error) => {
-          message.error("操作失败");
-          console.log(error);
-        });
+          .post(url, {
+            nickName: name.value,
+            phoneNumber: phone.value,
+            address: address.value,
+          })
+          .then((response) =>
+          {
+            if (response.data.statusCode == "successful")
+            {
+              message.info("操作成功");
+              getAddressList();
+              showModal.value = false;
+            } else
+            {
+              message.info(response.data.message);
+            }
+          })
+          .catch((error) =>
+          {
+            message.error("操作失败");
+            console.log(error);
+          });
     }
-    function saveInfo() {
+
+    function saveInfo()
+    {
       if (!nickName.value) return message.warning("请输入姓名");
       if (!phoneNumber.value) return message.warning("请输入手机号");
       // 正则校验
       let regPhone = /^[1][3,4,5,6,7,8][0-9]{9}$/;
-      if (!regPhone.test(phoneNumber.value)) {
+      if (!regPhone.test(phoneNumber.value))
+      {
         message.warning("请输入11位正确的手机号");
         return false;
       }
       // if (!addressName.value) return message.warning("请输入地址");
       axios
-        .post(`/api/customer/${userInfo.value.ID}/address/update`, {
-          nickName: nickName.value,
-          phoneNumber: phoneNumber.value,
-          address: userInfo.value.addressName,
-        })
-        .then((response) => {
-          if (response.data.statusCode == "successful") {
-            message.info("操作成功");
-            localStorage.setItem(
-              "customer_infl",
-              JSON.stringify({
-                ID: userInfo.value.ID,
-                nickName: nickName.value,
-                addressName: userInfo.value.addressName,
-                phoneNumber: phoneNumber.value,
-              })
-            );
-            isEdit.value = false;
-          } else {
-            message.info(response.data.message);
-          }
-        })
-        .catch((error) => {
-          message.error("操作失败");
-          console.log(error);
-        });
+          .post(`/api/customer/${userInfo.value.ID}/address/update`, {
+            nickName: nickName.value,
+            phoneNumber: phoneNumber.value,
+            address: userInfo.value.addressName,
+          })
+          .then((response) =>
+          {
+            if (response.data.statusCode == "successful")
+            {
+              message.info("操作成功");
+              localStorage.setItem(
+                  "customer_infl",
+                  JSON.stringify({
+                    ID: userInfo.value.ID,
+                    nickName: nickName.value,
+                    addressName: userInfo.value.addressName,
+                    phoneNumber: phoneNumber.value,
+                  })
+              );
+              isEdit.value = false;
+            } else
+            {
+              message.info(response.data.message);
+            }
+          })
+          .catch((error) =>
+          {
+            message.error("操作失败");
+            console.log(error);
+          });
     }
+
     return {
       showUpd,
       saveInfo,
@@ -398,15 +453,18 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
 }
+
 .add {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
+
 .one-item {
   margin: 10px 0;
 }
+
 .info-item {
   margin: 10px 0;
   display: flex;

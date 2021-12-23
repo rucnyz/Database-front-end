@@ -10,35 +10,35 @@
         <section class="input-area">
           <p class="one-item">
             <n-input
-              v-model="realName"
-              clearable
-              placeholder="请输入姓名"
-              @input="onInputrealName"
+                v-model="realName"
+                clearable
+                placeholder="请输入姓名"
+                @input="onInputrealName"
             ></n-input>
           </p>
           <p class="one-item">
             <n-input
-              v-model="phoneNumber"
-              clearable
-              placeholder="请输入手机号（将会被作为账号）"
-              @input="onInputphoneNumber"
+                v-model="phoneNumber"
+                clearable
+                placeholder="请输入手机号（将会被作为账号）"
+                @input="onInputphoneNumber"
             ></n-input>
           </p>
           <p class="one-item">
             <n-input
-              v-model="nickName"
-              clearable
-              placeholder="请输入昵称"
-              @input="onInputnickName"
+                v-model="nickName"
+                clearable
+                placeholder="请输入昵称"
+                @input="onInputnickName"
             ></n-input>
           </p>
           <p class="one-item">
             <n-input
-              v-model="password"
-              clearable
-              type="password"
-              @input="onInputpassword"
-              placeholder="请输入密码"
+                v-model="password"
+                clearable
+                type="password"
+                @input="onInputpassword"
+                placeholder="请输入密码"
             ></n-input>
           </p>
         </section>
@@ -46,17 +46,18 @@
         <!-- 提交区 -->
         <section class="submit-area margin-top-twenty" style="margin-top: 20px">
           <n-button
-            :loading="loading"
-            type="primary"
-            @click="postLoginInfo"
-            style="width: 120px"
-            >注册</n-button
+              :loading="loading"
+              type="primary"
+              @click="postLoginInfo"
+              style="width: 120px"
+          >注册
+          </n-button
           >
         </section>
         <div style="margin-top: 10px; text-align: right">
           已有账号，<span class="pointer hover-f22e00" @click="goLogin()"
-            >去登录</span
-          >
+        >去登录</span
+        >
         </div>
       </div>
     </div>
@@ -65,11 +66,11 @@
 
 <!--suppress JSPotentiallyInvalidConstructorUsage -->
 <script setup lang="ts">
-import { ref, inject } from "vue";
+import {ref, inject} from "vue";
 import {getEncrypt} from "../api";
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import { useMessage } from "naive-ui";
+import {useRouter} from "vue-router";
+import {useStore} from "vuex";
+import {useMessage} from "naive-ui";
 
 const store = useStore(); // 获取vuex实例
 const router = useRouter(); // 获取router实例
@@ -84,35 +85,43 @@ const axios: any = inject("axios");
 const Login = ref("注册");
 // True为正在加载
 const loading = ref(false);
+
 // 使用SHA256加密
 function goLogin() {
   router.push({
     path: "/login",
   });
 }
+
 function goHome() {
   router.push({
     path: "/home",
   });
 }
+
 // 信息提示
 const message = useMessage();
+
 function onInputrealName(e: string) {
   console.log(e);
   realName.value = e;
 }
+
 function onInputphoneNumber(e: string) {
   console.log(e);
   phoneNumber.value = e;
 }
+
 function onInputnickName(e: string) {
   console.log(e);
   nickName.value = e;
 }
+
 function onInputpassword(e: string) {
   console.log(e);
   password.value = e;
 }
+
 // 用于传递信息给后端，当点击登录按钮触发
 function postLoginInfo(): void {
   console.log(realName.value);
@@ -148,28 +157,28 @@ function postLoginInfo(): void {
   };
   // 传递过去
   axios
-    .post("/api/customer/register", info)
-    .then((response: { data: any; }) => {
-      loading.value = !loading.value;
-      console.log(response.data);
-      let data = response.data;
-      if (data.statusCode == "successful") {
-        // message.success("注册成功！");
-        // 注册成功后延迟0.5秒跳转
-        // 注册成功，可以登录
-        setTimeout(() => {
-          router.push({
-            path: "/login",
-          });
-        }, 500);
-      } else {
-        message.info(data.message);
-      }
-    })
-    .catch((error: any) => {
-      loading.value = !loading.value;
-      console.log(error);
-    });
+      .post("/api/customer/register", info)
+      .then((response: { data: any; }) => {
+        loading.value = !loading.value;
+        console.log(response.data);
+        let data = response.data;
+        if (data.statusCode == "successful") {
+          // message.success("注册成功！");
+          // 注册成功后延迟0.5秒跳转
+          // 注册成功，可以登录
+          setTimeout(() => {
+            router.push({
+              path: "/login",
+            });
+          }, 500);
+        } else {
+          message.info(data.message);
+        }
+      })
+      .catch((error: any) => {
+        loading.value = !loading.value;
+        console.log(error);
+      });
 }
 </script>
 
@@ -192,11 +201,9 @@ function postLoginInfo(): void {
     width: 350px;
     padding: 30px;
     border-radius: 10px;
-    background-image: linear-gradient(
-      to right,
-      rgba(245, 245, 220, 0.9),
-      rgba(255, 255, 224, 0.85)
-    );
+    background-image: linear-gradient(to right,
+    rgba(245, 245, 220, 0.9),
+    rgba(255, 255, 224, 0.85));
 
     .title {
       font-weight: bold;
@@ -230,12 +237,15 @@ function postLoginInfo(): void {
     }
   }
 }
+
 .hover-f22e00:hover {
   color: #f22e00;
 }
+
 .hover-f22e00 {
   color: #e93e17;
 }
+
 .goback {
   position: fixed;
   top: 30px;

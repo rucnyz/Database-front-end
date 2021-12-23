@@ -5,18 +5,18 @@
         <div class="flex" v-if="!customer_infl">
           <span class="text-f22e00 pointer" @click="goLogin()">亲，请登录</span>
           <span class="pointer hover-f22e00" @click="goRegister()"
-            >免费注册</span
+          >免费注册</span
           >
         </div>
         <div class="" v-else>
           <span class="pointer text-f22e00 hover-f22e00" @click="goMyPage()">{{
-            customer_infl.nickName
-          }}</span>
+              customer_infl.nickName
+            }}</span>
           <span class="pointer hover-f22e00" @click="goOut()">退出</span>
         </div>
         <div class="pointer hover-f22e00 flex align-center" @click="goCart()">
           <div class="cart-img">
-            <img src="../assets/common/cart.png" alt="" />
+            <img src="../assets/common/cart.png" alt=""/>
           </div>
           <span> 购物车 </span>
         </div>
@@ -25,57 +25,75 @@
   </div>
 </template>
 
-<script >
-import { defineComponent, ref, onMounted } from "vue";
-import { useMessage } from "naive-ui";
-import { useRouter } from "vue-router";
+<script>
+import {defineComponent, ref, onMounted} from "vue";
+import {useMessage} from "naive-ui";
+import {useRouter} from "vue-router";
+
 export default defineComponent({
   name: "header",
-  setup() {
+  setup()
+  {
     const message = useMessage();
     const router = useRouter();
     let customer_infl = ref("");
-    onMounted(() => {
+    onMounted(() =>
+    {
       let customer_infl_storage = localStorage.getItem("customer_infl") || "";
       // console.log(customer_infl_storage, 111);
-      if (customer_infl_storage) {
+      if (customer_infl_storage)
+      {
         customer_infl.value = JSON.parse(customer_infl_storage);
       }
     });
-    function goOut() {
+
+    function goOut()
+    {
       message.success("退出成功");
       localStorage.setItem("customer_infl", "");
-      setTimeout(() => {
+      setTimeout(() =>
+      {
         window.location.reload();
       }, 500);
     }
-    function goCart() {
-      if (customer_infl.value) {
+
+    function goCart()
+    {
+      if (customer_infl.value)
+      {
         router.push({
           path: "/cart",
         });
-      } else {
+      } else
+      {
         message.warning("请先登录！");
         router.push({
           path: "/login",
         });
       }
     }
-    function goRegister() {
+
+    function goRegister()
+    {
       router.push({
         path: "/register",
       });
     }
-    function goLogin() {
+
+    function goLogin()
+    {
       router.push({
         path: "/login",
       });
     }
-    function goMyPage() {
+
+    function goMyPage()
+    {
       router.push({
         path: "/my",
       });
     }
+
     return {
       customer_infl,
       goCart,
@@ -94,26 +112,32 @@ export default defineComponent({
   width: 100%;
   background-color: #f5f5f5;
   border-bottom: 1px solid #eee;
+
   .header-con {
     display: flex;
     justify-content: flex-end;
     font-size: 12px;
+
     span {
       margin-right: 20px;
     }
   }
 }
+
 .text-f22e00 {
   color: #f22e00;
 }
+
 .hover-f22e00:hover {
   color: #f22e00;
 }
+
 .cart-img {
   height: 100%;
   margin-right: 4px;
   display: flex;
   align-items: center;
+
   img {
     width: 15px;
     height: 15px;
