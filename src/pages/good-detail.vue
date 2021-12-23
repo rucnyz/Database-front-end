@@ -79,7 +79,7 @@
             :key="index"
           >
             <div>
-              评论人：{{ item.customerID }}
+              评论人：{{ item.nickname }}
               <span style="margin-left: 20px">评论时间：{{ item.date }}</span>
             </div>
             <div
@@ -100,12 +100,13 @@
   </div>
 </template>
 <script>
-import { defineComponent, ref, onMounted, watch } from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import Header from "../components/header.vue";
-import { useMessage } from "naive-ui";
-import { useRouter, useRoute } from "vue-router";
-import { getCurrentUserInfo } from "../utils";
+import {useMessage} from "naive-ui";
+import {useRoute, useRouter} from "vue-router";
+import {getCurrentUserInfo} from "../utils";
 import axios from "axios";
+
 export default defineComponent({
   components: { Header },
   name: "good-detail",
@@ -184,8 +185,7 @@ export default defineComponent({
         .then((response) => {
           console.log(response.data);
           total.value = response.data.totalSize;
-          let list = commentList.value.concat(response.data.comments);
-          commentList.value = list;
+          commentList.value = commentList.value.concat(response.data.comments);
         })
         .catch((error) => {
           console.log(error);

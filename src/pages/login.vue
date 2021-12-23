@@ -11,7 +11,7 @@
         <p class="one-item">
           <n-input
             v-model="phone"
-            placeholder="请输入账号"
+            placeholder="请输入账号（手机号为账号）"
             @input="onInputPhone"
           ></n-input>
         </p>

@@ -20,7 +20,7 @@
             <n-input
               v-model="phoneNumber"
               clearable
-              placeholder="请输入手机号"
+              placeholder="请输入手机号（将会被作为账号）"
               @input="onInputphoneNumber"
             ></n-input>
           </p>
