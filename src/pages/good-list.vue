@@ -5,6 +5,12 @@
       <!-- 搜索 -->
       <div class="wid-con section">
         <div class="search" >
+          <span
+              @click="goHome()"
+              class="pointer"
+              style="color: #2080f0; float: right"
+          >返回主页</span
+          >
           <n-input-group class="flex justify-center">
             <n-input
               placeholder="请输入喜欢的宝贝"
@@ -133,6 +139,12 @@ const router = useRouter();
           console.log(error);
         });
     }
+    const goHome = () =>
+    {
+      router.push({
+        path: "/home",
+      });
+    };
     // 判断是否到底部
     window.onscroll = function () {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
@@ -167,6 +179,7 @@ const router = useRouter();
       category,
       total,
       inputSearchChange,
+      goHome,
       goodList,
       getRouter,
       goGoodDetail,

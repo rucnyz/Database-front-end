@@ -66,7 +66,7 @@
 <!--suppress JSPotentiallyInvalidConstructorUsage -->
 <script setup lang="ts">
 import { ref, inject } from "vue";
-import jsSHA from "jssha";
+import {getEncrypt} from "../api";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useMessage } from "naive-ui";
@@ -85,7 +85,6 @@ const Login = ref("注册");
 // True为正在加载
 const loading = ref(false);
 // 使用SHA256加密
-const shaPassword = new jsSHA("SHA-256", "TEXT", { encoding: "UTF8" });
 function goLogin() {
   router.push({
     path: "/login",
@@ -98,19 +97,19 @@ function goHome() {
 }
 // 信息提示
 const message = useMessage();
-function onInputrealName(e) {
+function onInputrealName(e: string) {
   console.log(e);
   realName.value = e;
 }
-function onInputphoneNumber(e) {
+function onInputphoneNumber(e: string) {
   console.log(e);
   phoneNumber.value = e;
 }
-function onInputnickName(e) {
+function onInputnickName(e: string) {
   console.log(e);
   nickName.value = e;
 }
-function onInputpassword(e) {
+function onInputpassword(e: string) {
   console.log(e);
   password.value = e;
 }
@@ -126,7 +125,7 @@ function postLoginInfo(): void {
     return;
   }
   if (!regPhone.test(phoneNumber.value)) {
-    message.warning("请输入11位正确的手机号");
+    message.warning("请输入11位正确的手机号（将会被作为账号）");
     return;
   }
   if (!regName.test(nickName.value)) {
@@ -140,19 +139,17 @@ function postLoginInfo(): void {
   // 首先加载
   loading.value = !loading.value;
   // 进行加密
-  shaPassword.update(password.value);
-  console.log(shaPassword.getHash("HEX")); // 测试一下
   const info = {
     version: "0.1",
-    password: shaPassword.getHash("HEX"),
+    password: getEncrypt(password.value),
     realName: realName.value,
     nickName: nickName.value,
     phoneNumber: phoneNumber.value,
   };
   // 传递过去
   axios
-    .post("/api/register", info)
-    .then((response) => {
+    .post("/api/customer/register", info)
+    .then((response: { data: any; }) => {
       loading.value = !loading.value;
       console.log(response.data);
       let data = response.data;
