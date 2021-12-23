@@ -10,7 +10,7 @@ export default defineConfig({
       "/api":{
         // target: "http://192.168.210.46:5200",
         target: "http://127.0.0.1:5000",
-        // target: "http://rpfcsw.natappfree.cc",
+        // target: "http://xzqrff.natappfree.cc",
         changeOrigin: true,
       },
     }
