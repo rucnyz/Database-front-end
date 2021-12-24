@@ -156,23 +156,27 @@ export default defineComponent({
       return false
       console.log(val.target.value);
       item.count = val.target.value;
-       // 修改购物车商品数量
+      // 修改购物车商品数量
       axios
-        .post(`/api/customer/${userInfo.value.ID}/shoppingCart/update`, {
-          productID: item.productID,
-          count: val.target.value,
-        })
-        .then((response) => {
-          console.log(response, "获取数据");
-          if (response.data.statusCode == "successful") {
-            console.log('修改购物车成功')
-          } else {
-            message.info(response.data.message);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .post(`/api/customer/${userInfo.value.ID}/shoppingCart/update`, {
+            productID: item.productID,
+            count: val.target.value,
+          })
+          .then((response) =>
+          {
+            console.log(response, "获取数据");
+            if (response.data.statusCode === "successful")
+            {
+              console.log('修改购物车成功')
+            } else
+            {
+              message.info(response.data.message);
+            }
+          })
+          .catch((error) =>
+          {
+            console.log(error);
+          });
       list.value = JSON.parse(JSON.stringify(list.value));
     }
 
@@ -182,21 +186,25 @@ export default defineComponent({
       item.count = val;
       // 修改购物车商品数量
       axios
-        .post(`/api/customer/${userInfo.value.ID}/shoppingCart/update`, {
-          productID: item.productID,
-          count: val,
-        })
-        .then((response) => {
-          console.log(response, "获取数据");
-          if (response.data.statusCode == "successful") {
-            console.log('修改购物车成功')
-          } else {
-            message.info(response.data.message);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .post(`/api/customer/${userInfo.value.ID}/shoppingCart/update`, {
+            productID: item.productID,
+            count: val,
+          })
+          .then((response) =>
+          {
+            console.log(response, "获取数据");
+            if (response.data.statusCode === "successful")
+            {
+              console.log('修改购物车成功')
+            } else
+            {
+              message.info(response.data.message);
+            }
+          })
+          .catch((error) =>
+          {
+            console.log(error);
+          });
       list.value = JSON.parse(JSON.stringify(list.value));
     }
 
