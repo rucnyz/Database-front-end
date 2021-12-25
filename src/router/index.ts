@@ -51,6 +51,13 @@ export default createRouter({
             path: '/affirm-order',
             component: () => import("../pages/affirm-order.vue")
         },
-
+        {
+            path: '/admin-login',
+            component: () => import("../pages/admin-login.vue")
+        },
+        {
+            path: '/statistics-data',
+            component: () => import("../pages/statistics-data.vue")
+        },
     ]
 })

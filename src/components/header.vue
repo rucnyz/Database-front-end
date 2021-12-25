@@ -9,6 +9,9 @@
           >
         </div>
         <div class="" v-else>
+          <span class="pointer  hover-f22e00" @click="goStatistics()">
+            排行榜
+          </span>
           <span class="pointer text-f22e00 hover-f22e00" @click="goMyPage()">{{
               customer_infl.nickName
             }}</span>
@@ -94,6 +97,13 @@ export default defineComponent({
       });
     }
 
+    function goStatistics()
+    {
+      router.push({
+        path: "/statistics-data",
+      });
+    }
+
     return {
       customer_infl,
       goCart,
@@ -101,6 +111,7 @@ export default defineComponent({
       goLogin,
       goOut,
       goMyPage,
+      goStatistics
     };
   },
 });
