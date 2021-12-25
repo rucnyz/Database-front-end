@@ -328,7 +328,6 @@ import {defineComponent, ref, onMounted, watch} from "vue";
 import Header from "../components/header.vue";
 import {useMessage} from "naive-ui";
 import {useRouter} from "vue-router";
-import {getCurrentUserInfo} from "../utils";
 import axios from "axios";
 
 export default defineComponent({

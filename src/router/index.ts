@@ -33,11 +33,11 @@ export default createRouter({
         },
         {
             path: '/good-list',
-            component: () => import("../pages/good-list.vue")
+            component: () => import("../pages/goods-list.vue")
         },
         {
             path: '/good-detail',
-            component: () => import("../pages/good-detail.vue")
+            component: () => import("../pages/goods-detail.vue")
         },
         {
             path: '/order',
