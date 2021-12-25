@@ -33,6 +33,7 @@
                     <th>商品ID</th>
                     <th>商品名字</th>
                     <th>销量</th>
+                    <th>排名</th>
                   </tr>
                   </thead>
                   <tbody v-for="(j, i) in getDataHotList" :key="i">
@@ -41,6 +42,7 @@
                     <td>{{ item.productId }}</td>
                     <td>{{ item.productName }}</td>
                     <td>{{ item.sumQuantity }}</td>
+                    <td>{{ item.rank }}</td>
                   </tr>
                   </tbody>
                 </n-table>

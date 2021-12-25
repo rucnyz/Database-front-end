@@ -107,6 +107,10 @@ function postLoginInfo(): void {
                 roleId: data["adminId"],
               })
           );
+          localStorage.setItem(
+              "customer_infl",
+              ''
+          );
           router.push({
             path: "/statistics-data",
           });
