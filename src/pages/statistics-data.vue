@@ -2,9 +2,20 @@
   <div>
     <div class="header">
       <div class="wid-con">
-        <div class="header-con">
-          <div></div>
-          <div></div>
+        <div class="header-con flex justify-between">
+          <div>
+            <span
+                @click="goHome()"
+                class="pointer"
+                style="color: #2080f0"
+            >返回主页</span
+            >
+          </div>
+          <div>
+              <span class="pointer  hover-f22e00" @click="goAdminLogin()">
+            管理员登录
+          </span>
+          </div>
         </div>
       </div>
     </div>
@@ -34,7 +45,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataHotList.length === 0"
+                    v-if="getDataHotList.length == 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -81,7 +92,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataSmalltList.length === 0"
+                    v-if="getDataSmalltList.length == 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -90,7 +101,7 @@
             </n-tab-pane>
             <!-- 管理员 商家自己可见 下-->
             <n-tab-pane
-                v-if="role_Type === 'A' || role_Type === 'S'"
+                v-if="role_Type == 'A' || role_Type == 'S'"
                 name="signin2"
                 tab="销售额排行榜"
             >
@@ -114,7 +125,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataSellList.length === 0"
+                    v-if="getDataSellList.length == 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -123,7 +134,7 @@
             </n-tab-pane>
             <!-- 管理员，用户自己 下-->
             <n-tab-pane
-                v-if="role_Type === 'A' || role_Type === 'C'"
+                v-if="role_Type == 'A' || role_Type == 'C'"
                 name="signin3"
                 tab="购买量排行榜"
             >
@@ -149,7 +160,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataPayList.length === 0"
+                    v-if="getDataPayList.length == 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -158,7 +169,7 @@
             </n-tab-pane>
             <!-- 管理员 下 -->
             <n-tab-pane
-                v-if="role_Type === 'A'"
+                v-if="role_Type == 'A'"
                 name="signin4"
                 tab="省级消费额排行榜"
             >
@@ -182,7 +193,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataProvinceList.length === 0"
+                    v-if="getDataProvinceList.length == 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -191,7 +202,7 @@
             </n-tab-pane>
             <!-- 管理员 商家自己 下-->
             <n-tab-pane
-                v-if="role_Type === 'A' || role_Type === 'S'"
+                v-if="role_Type == 'A' || role_Type == 'S'"
                 name="signin5"
                 tab="店铺铁粉排行榜"
             >
@@ -217,7 +228,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataClientList.length === 0"
+                    v-if="getDataClientList.length == 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -226,7 +237,7 @@
             </n-tab-pane>
             <!-- 管理员，用户自己 下-->
             <n-tab-pane
-                v-if="role_Type === 'A' || role_Type === 'C'"
+                v-if="role_Type == 'A' || role_Type == 'C'"
                 name="signin6"
                 tab="会员消费额排行榜"
             >
@@ -250,7 +261,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataVipList.length === 0"
+                    v-if="getDataVipList.length == 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -297,7 +308,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDatahotGoodsList.length === 0"
+                    v-if="getDatahotGoodsList.length == 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -512,7 +523,23 @@ export default defineComponent({
           });
     }
 
+    function goAdminLogin()
+    {
+      router.push({
+        path: "/admin-login",
+      });
+    }
+
+    function goHome()
+    {
+      router.push({
+        path: "/home",
+      });
+    }
+
     return {
+      goAdminLogin,
+      goHome,
       getDataClientList,
       getDataVipList,
       getDataProvinceList,
@@ -560,4 +587,7 @@ export default defineComponent({
   }
 }
 
+.hover-f22e00:hover {
+  color: #f22e00;
+}
 </style>
