@@ -592,4 +592,8 @@ export default defineComponent({
 .hover-f22e00:hover {
   color: #f22e00;
 }
+
+td, th {
+  text-align: center
+}
 </style>
