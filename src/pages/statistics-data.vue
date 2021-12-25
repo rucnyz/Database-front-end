@@ -34,7 +34,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataHotList.length == 0"
+                    v-if="getDataHotList.length === 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -81,7 +81,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataSmalltList.length == 0"
+                    v-if="getDataSmalltList.length === 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -90,7 +90,7 @@
             </n-tab-pane>
             <!-- 管理员 商家自己可见 下-->
             <n-tab-pane
-                v-if="role_Type == 'A' || role_Type == 'S'"
+                v-if="role_Type === 'A' || role_Type === 'S'"
                 name="signin2"
                 tab="销售额排行榜"
             >
@@ -114,7 +114,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataSellList.length == 0"
+                    v-if="getDataSellList.length === 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -123,7 +123,7 @@
             </n-tab-pane>
             <!-- 管理员，用户自己 下-->
             <n-tab-pane
-                v-if="role_Type == 'A' || role_Type == 'C'"
+                v-if="role_Type === 'A' || role_Type === 'C'"
                 name="signin3"
                 tab="购买量排行榜"
             >
@@ -149,7 +149,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataPayList.length == 0"
+                    v-if="getDataPayList.length === 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -158,7 +158,7 @@
             </n-tab-pane>
             <!-- 管理员 下 -->
             <n-tab-pane
-                v-if="role_Type == 'A'"
+                v-if="role_Type === 'A'"
                 name="signin4"
                 tab="省级消费额排行榜"
             >
@@ -182,7 +182,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataProvinceList.length == 0"
+                    v-if="getDataProvinceList.length === 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -191,7 +191,7 @@
             </n-tab-pane>
             <!-- 管理员 商家自己 下-->
             <n-tab-pane
-                v-if="role_Type == 'A' || role_Type == 'S'"
+                v-if="role_Type === 'A' || role_Type === 'S'"
                 name="signin5"
                 tab="店铺铁粉排行榜"
             >
@@ -217,7 +217,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataClientList.length == 0"
+                    v-if="getDataClientList.length === 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -250,7 +250,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDataVipList.length == 0"
+                    v-if="getDataVipList.length === 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据
@@ -297,7 +297,7 @@
                   </tbody>
                 </n-table>
                 <div
-                    v-if="getDatahotGoodsList.length == 0"
+                    v-if="getDatahotGoodsList.length === 0"
                     style="padding: 10px; text-align: center"
                 >
                   暂无数据

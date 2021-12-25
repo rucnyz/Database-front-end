@@ -98,7 +98,7 @@ function postLoginInfo(): void {
   // 传递过去
   axios
       .post("/api/customer/login", info)
-      .then((response) => {
+      .then((response: { data: any; }) => {
         console.log(response.data);
         let data = response.data;
         if (data.statusCode == "successful") {
