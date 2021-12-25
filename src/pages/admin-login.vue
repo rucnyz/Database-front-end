@@ -135,7 +135,7 @@ function postLoginInfo(): void {
   width: 100vw;
   height: 100vh;
   // background-image: url("../assets/img/background.jpeg");
-  background-image: url("../../public/img/background.jpeg");
+  background-image: url("../../public/img/hsglogin.jpg");
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
