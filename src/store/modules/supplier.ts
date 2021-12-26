@@ -1,8 +1,8 @@
 import { createStore } from "vuex"
 import { getEncrypt } from "@/api/index"
 import axios from "axios"
-import { useRouter } from "vue-router"
-const router = useRouter()
+import router from "@/router/index"
+
 
 const state = {
         isLogged: false
@@ -22,18 +22,15 @@ const actions = {
         const passwd_hashed = getEncrypt(payload.passwd)
         axios.post("/api/supplier/login",{"ownerID":payload.id,"password":passwd_hashed})
             .then( (response: {data: any})=> {
-                console.log("then")
                 const data = response.data
                 if(data.statusCode == "successful"){
                     commit("LOGIN")
-                    router.push("supplier/home")
+                    router.push({path:`/supplier/home/${data.suppID}`})
                 }
             })
             .catch((err:any)=>{
-                console.log("catch")
                 console.log(err)
             })
-            .finally(()=>{console.log("finally")}) 
     }
 }
 

@@ -15,7 +15,8 @@
             </n-form-item>
             <n-form-item label="密码:">
                 <n-input v-model:value="logInfo.password" 
-                        placeholder="请输入密码" clearable></n-input>
+                        placeholder="请输入密码" clearable
+                        show-password-on="mousedown"></n-input>
             </n-form-item>
             <n-form-item>
                 <n-button @click="login" attr-type="button">登陆</n-button>

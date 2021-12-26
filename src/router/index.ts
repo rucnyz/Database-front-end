@@ -5,7 +5,7 @@ export default createRouter({
     'routes': [
         {
             path: "/",
-            redirect: "/supplier/login"
+            redirect: "/supplier/home/S000000001"
         },
         {
             path: "/test",
@@ -56,8 +56,25 @@ export default createRouter({
             component: () => import("@/pages/supplier/index.vue"),
             children:[
                 {
-                    path: 'home',
-                    component: () => import("@/pages/supplier/home.vue")
+                    path: 'home/:id',
+                    component: () => import("@/pages/supplier/home.vue"),
+                    children:[
+                        {
+                            // 默认跳转订单页
+                            path: "",
+                            redirect: {name: "supplier.home.order"}
+                        },
+                        {
+                            path: "order",
+                            name: "supplier.home.order",
+                            component: () => import("@/pages/supplier/home/order.vue")
+                        },
+                        {
+                            path: "product",
+                            name: "supplier.home.product",
+                            component: () => import("@/pages/supplier/home/product.vue")
+                        }
+                    ]
                 },
                 {
                     path: 'login',
