@@ -99,13 +99,11 @@ import {useRouter} from "vue-router";
 export default defineComponent({
   components: {Header},
 
-  setup()
-  {
+  setup() {
     const router = useRouter();
 
     // 去商品详情
-    function goGoodDetail(item)
-    {
+    function goGoodDetail(item) {
       router.push({
         path: "/good-detail",
         query: {
@@ -114,8 +112,7 @@ export default defineComponent({
       });
     }
 
-    onMounted(() =>
-    {
+    onMounted(() => {
       getClassifyList();
       getCarouselList();
       getGoodList();
@@ -128,15 +125,13 @@ export default defineComponent({
     const fixed = ref("");
     const keywords = ref("");
 
-    function inputSearchChange(val)
-    {
+    function inputSearchChange(val) {
       console.log(val);
       keywords.value = val;
     }
 
     // 去结果页
-    function goGoodListPage(val = "")
-    {
+    function goGoodListPage(val = "") {
       console.log(keywords.value);
       router.push({
         path: "/good-list",
@@ -148,8 +143,7 @@ export default defineComponent({
     }
 
     // 获取商品列表
-    function getGoodList()
-    {
+    function getGoodList() {
       axios
           .get("/api/HomePage/getProduct", {
             params: {
@@ -157,29 +151,24 @@ export default defineComponent({
               page: currentPage.value,
             },
           })
-          .then((response) =>
-          {
+          .then((response) => {
             console.log(response.data);
             total.value = response.data.totalSize;
             goodList.value = goodList.value.concat(response.data.detail);
           })
-          .catch((error) =>
-          {
+          .catch((error) => {
             console.log(error);
           });
     }
 
     // 获取分类
-    function getClassifyList()
-    {
+    function getClassifyList() {
       axios
           .get("/api/HomePage/getCategory", {})
-          .then((response) =>
-          {
+          .then((response) => {
             console.log(response.data);
             let list = [];
-            response.data.category.forEach((item, index) =>
-            {
+            response.data.category.forEach((item, index) => {
               let newItem = {
                 id: index,
                 title: item,
@@ -188,15 +177,13 @@ export default defineComponent({
             });
             classifyList.value = list;
           })
-          .catch((error) =>
-          {
+          .catch((error) => {
             console.log(error);
           });
     }
 
     // 获取轮播图数据
-    function getCarouselList()
-    {
+    function getCarouselList() {
       axios
           .get("/api/HomePage/getProduct", {
             params: {
@@ -204,20 +191,17 @@ export default defineComponent({
               page: 1,
             },
           })
-          .then((response) =>
-          {
+          .then((response) => {
             console.log(response.data);
             carouselList.value = response.data.detail;
           })
-          .catch((error) =>
-          {
+          .catch((error) => {
             console.log(error);
           });
     }
 
     // 判断是否到底部
-    window.onscroll = function ()
-    {
+    window.onscroll = function () {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
       const scrollTop =
           document.documentElement.scrollTop || document.body.scrollTop;
@@ -228,12 +212,10 @@ export default defineComponent({
       const scrollHeight =
           document.documentElement.scrollHeight || document.body.scrollHeight;
       //滚动条到底部的条件
-      if (Math.round(scrollTop) + windowHeight === scrollHeight)
-      {
+      if (Math.round(scrollTop) + windowHeight === scrollHeight) {
         //写后台加载数据的函数
         console.log("到顶部", total.value, goodList.value.length);
-        if (total.value > goodList.value.length)
-        {
+        if (total.value > goodList.value.length) {
           currentPage.value = currentPage.value + 1;
           getGoodList();
         }
@@ -241,11 +223,9 @@ export default defineComponent({
 
       // 搜索框吸顶效果
       // console.log(scrollTop);
-      if (Math.round(scrollTop) >= 35)
-      {
+      if (Math.round(scrollTop) >= 35) {
         fixed.value = "search-fixed";
-      } else
-      {
+      } else {
         fixed.value = "";
       }
     };

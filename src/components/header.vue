@@ -47,6 +47,12 @@ export default defineComponent({
       if (customer_infl_storage)
       {
         customer_infl.value = JSON.parse(customer_infl_storage);
+        localStorage.setItem(
+            "role_infl",
+            JSON.stringify({
+              roleId: customer_infl.value.ID,
+            })
+        );
       }
     });
 
@@ -122,52 +128,37 @@ export default defineComponent({
   line-height: 35px;
   width: 100%;
   background-color: #f5f5f5;
-  border-bottom: 2px solid #eee;
-  font-size: small;
-}
+  border-bottom: 1px solid #eee;
 
-.header-search {
-  border: 1px solid #FF1700;
-}
+  .header-con {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
 
-.header-login {
-  max-width:100%;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  &:hover{
-    color: #FF1700;
-    cursor: pointer;
+    span {
+      margin-right: 20px;
+    }
   }
 }
 
-.header-register {
-  max-width:100%;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  &:hover{
-    color: #FF1700;
-    cursor: pointer;
-  }
+.text-f22e00 {
+  color: #f22e00;
 }
 
-.header-cart {  
+.hover-f22e00:hover {
+  color: #f22e00;
+}
+
+.cart-img {
+  height: 100%;
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+
   img {
-    vertical-align: text-bottom;
     width: 15px;
     height: 15px;
-  }
-
-  div {
-    max-width:100%;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    &:hover{
-    color: #FF1700;
-    cursor: pointer;
-    }
+    margin-top: -4px;
   }
 }
 </style>
