@@ -28,7 +28,7 @@
       </div>
       <div style="margin: 30px">
         <n-card title="">
-          <n-empty v-if="list.length == 0" description="购物车什么也没有">
+          <n-empty v-if="list.length === 0" description="购物车什么也没有">
             <template #extra>
               <n-button size="small" @click="goHome()">去挑选商品</n-button>
             </template>
@@ -153,8 +153,30 @@ export default defineComponent({
     // 修改数量
     function handleChangeNUmber(val, item)
     {
+      return false
       console.log(val.target.value);
       item.count = val.target.value;
+      // 修改购物车商品数量
+      axios
+          .post(`/api/customer/${userInfo.value.ID}/shoppingCart/update`, {
+            productID: item.productID,
+            count: val.target.value,
+          })
+          .then((response) =>
+          {
+            console.log(response, "获取数据");
+            if (response.data.statusCode === "successful")
+            {
+              console.log('修改购物车成功')
+            } else
+            {
+              message.info(response.data.message);
+            }
+          })
+          .catch((error) =>
+          {
+            console.log(error);
+          });
       list.value = JSON.parse(JSON.stringify(list.value));
     }
 
@@ -162,6 +184,27 @@ export default defineComponent({
     {
       console.log(val, item);
       item.count = val;
+      // 修改购物车商品数量
+      axios
+          .post(`/api/customer/${userInfo.value.ID}/shoppingCart/update`, {
+            productID: item.productID,
+            count: val,
+          })
+          .then((response) =>
+          {
+            console.log(response, "获取数据");
+            if (response.data.statusCode === "successful")
+            {
+              console.log('修改购物车成功')
+            } else
+            {
+              message.info(response.data.message);
+            }
+          })
+          .catch((error) =>
+          {
+            console.log(error);
+          });
       list.value = JSON.parse(JSON.stringify(list.value));
     }
 
@@ -217,7 +260,7 @@ export default defineComponent({
           .then((response) =>
           {
             console.log(response, "获取数据");
-            if (response.data.statusCode == "successful")
+            if (response.data.statusCode === "successful")
             {
               message.info("删除成功");
               getList();
@@ -249,7 +292,7 @@ export default defineComponent({
           arr.push(item);
         }
       });
-      if (arr.length == 0)
+      if (arr.length === 0)
       {
         message.error("请选择商品！");
         return false;

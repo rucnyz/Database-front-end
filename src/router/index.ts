@@ -33,11 +33,11 @@ export default createRouter({
         },
         {
             path: '/good-list',
-            component: () => import("../pages/good-list.vue")
+            component: () => import("../pages/goods-list.vue")
         },
         {
             path: '/good-detail',
-            component: () => import("../pages/good-detail.vue")
+            component: () => import("../pages/goods-detail.vue")
         },
         {
             path: '/order',
@@ -50,6 +50,15 @@ export default createRouter({
         {
             path: '/affirm-order',
             component: () => import("../pages/affirm-order.vue")
+        },
+        {
+
+            path: '/admin-login',
+            component: () => import("../pages/admin-login.vue")
+        },
+        {
+            path: '/statistics-data',
+            component: () => import("../pages/statistics-data.vue")
         },
         {
             path: '/supplier',
@@ -85,7 +94,6 @@ export default createRouter({
                     component: () => import("@/pages/supplier/register.vue")
                 }
             ]
-        }
-
+        },
     ]
 })

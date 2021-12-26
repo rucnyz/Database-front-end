@@ -78,7 +78,7 @@
 
 <script>
 import Header from "../components/header.vue";
-import {defineComponent, ref, onMounted, getCurrentInstance} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import axios from "axios";
 import {useRoute, useRouter} from "vue-router";
 
@@ -148,8 +148,7 @@ export default defineComponent({
           {
             console.log(response.data);
             total.value = response.data.totalSize;
-            let list = goodList.value.concat(response.data.detail);
-            goodList.value = list;
+            goodList.value = goodList.value.concat(response.data.detail);
           })
           .catch((error) =>
           {

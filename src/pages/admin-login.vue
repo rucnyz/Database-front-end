@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <div class="goback" @click="goHome()">返回主页</div>
     <div class="login-info">
       <section class="title">
         <h2>{{ Login }}</h2>
@@ -37,8 +36,6 @@
         </n-button
         >
       </section>
-      <div style="margin-top:10px;text-align:right">没有账号，<span class="pointer hover-f22e00"
-                                                               @click="goRegister()">去注册</span></div>
     </div>
   </div>
 </template>
@@ -60,7 +57,7 @@ const password = ref("");
 // 用于传递数据给后端
 const axios: any = inject("axios");
 // 前端显示信息
-const Login = ref("Login");
+const Login = ref("管理员登录");
 // True为正在加载
 const loading = ref(false);
 
@@ -92,12 +89,12 @@ function postLoginInfo(): void {
   // 进行加密
   const info = {
     version: "0.1",
-    phoneNumber: phone.value,
-    password: getEncrypt(password.value),
+    adminName: phone.value,
+    password: password.value,
   };
   // 传递过去
   axios
-      .post("/api/customer/login", info)
+      .post("/api/admin/login", info)
       .then((response: { data: any; }) => {
         console.log(response.data);
         let data = response.data;
@@ -105,30 +102,18 @@ function postLoginInfo(): void {
           // 判断是否可以登录
           // 设置数据
           localStorage.setItem(
-              "customer_infl",
+              "role_infl",
               JSON.stringify({
-                ID: data["ID"],
-                nickName: data["nickName"],
-                addressName: data["addressName"],
-                phoneNumber: data["phoneNumber"],
+                roleId: data["adminId"],
               })
           );
           localStorage.setItem(
-              "role_infl",
-              JSON.stringify({
-                roleId: data["ID"],
-              })
+              "customer_infl",
+              ''
           );
-          // localStorage.customer_infl = JSON.stringify({
-          //   ID: data["ID"],
-          //   nickName: data["nickName"],
-          //   addressName: data["addressName"],
-          //   phoneNumber: data["phoneNumber"]
-          // });
           router.push({
-            path: "/home",
+            path: "/statistics-data",
           });
-
         } else {
           message.info(data.message);
         }
@@ -150,7 +135,7 @@ function postLoginInfo(): void {
   width: 100vw;
   height: 100vh;
   // background-image: url("../assets/img/background.jpeg");
-  background-image: url("../../public/img/background2.jpg");
+  background-image: url("../../public/img/hsglogin.jpg");
   background-size: 100% 100%;
   display: flex;
   justify-content: center;

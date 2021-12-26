@@ -79,7 +79,7 @@
               </div>
               <div>评价:{{ item.comment || "无" }}</div>
             </div>
-            <n-empty v-if="list.length == 0" description="你还没有订单">
+            <n-empty v-if="list.length === 0" description="你还没有订单">
               <template #extra>
                 <n-button size="small" @click="goHome()">去挑选商品</n-button>
               </template>
@@ -151,7 +151,7 @@ export default defineComponent({
           .then((response) =>
           {
             console.log(response, "获取数据");
-            if (response.data.statusCode == "successful")
+            if (response.data.statusCode === "successful")
             {
               message.info("退货成功");
               getList();
@@ -193,7 +193,7 @@ export default defineComponent({
           .then((response) =>
           {
             console.log(response, "获取数据");
-            if (response.data.statusCode == "successful")
+            if (response.data.statusCode === "successful")
             {
               message.info("评价成功！");
               showModel.value = false;

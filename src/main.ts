@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './router/index'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import "./style/index.less";
@@ -18,10 +18,6 @@ import {
     NMessageProvider,
     NInputGroup,
     NCarousel,
-    NGrid,
-    NGridItem,
-    NForm,
-    NFormItem,
     NSelect,
     NCard,
     NEmpty,
@@ -31,14 +27,19 @@ import {
     NPopconfirm,
     NModal,
     NRadio,
-    NRadioGroup
+    NRadioGroup,
+    NTabPane,
+    NTabs,
+    NTable,
+    NScrollbar
 } from 'naive-ui'
 
 const naive = create({
     components: [NButton, NPageHeader, NH2, NLayout, NSpace, NInput, NMessageProvider,
-        NCarousel, NInputGroup, NGrid, NGridItem, NForm, NFormItem, NSelect, NCard, NEmpty,
-        NDialogProvider, NCheckbox, NPopconfirm, NInputNumber, NModal, NRadio, NRadioGroup]
+        NCarousel, NInputGroup, NSelect, NCard, NEmpty, NDialogProvider, NCheckbox,
+        NPopconfirm, NInputNumber, NModal, NRadio, NRadioGroup, NTabPane, NTabs, NTable, NScrollbar]
 })
+
 
 const app = createApp(App)
 app.use(router)

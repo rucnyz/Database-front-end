@@ -352,7 +352,7 @@ export default defineComponent({
           })
           .then((response) =>
           {
-            if (response.data.statusCode == "successful")
+            if (response.data.statusCode === "successful")
             {
               message.info("操作成功");
               getAddressList();
@@ -389,7 +389,7 @@ export default defineComponent({
           })
           .then((response) =>
           {
-            if (response.data.statusCode == "successful")
+            if (response.data.statusCode === "successful")
             {
               message.info("操作成功");
               localStorage.setItem(
