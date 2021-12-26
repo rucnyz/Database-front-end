@@ -25,6 +25,12 @@ const actions = {
                 const data = response.data
                 if(data.statusCode == "successful"){
                     commit("LOGIN")
+                    localStorage.setItem(
+                        "role_infl",
+                        JSON.stringify({
+                          roleId: data["suppID"]
+                        })
+                    )
                     router.push({path:`/supplier/home/${data.suppID}`})
                 }
             })

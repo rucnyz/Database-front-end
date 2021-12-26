@@ -1,7 +1,7 @@
 <template>
   <n-layout>
     <n-layout-header>
-      <n-h2>您好，{{ supplier_id }}</n-h2>
+        <n-h2>您好，{{ supplier_id }}</n-h2>
     </n-layout-header>
     <n-layout has-sider>
       <n-layout-sider>
@@ -41,9 +41,23 @@ const menuOptions = [
         { default: () => "管理商品" }
       ),
     key: "to_product"
+  },
+  {
+    label: () =>
+      h(RouterLink,
+        {
+          to: { path:"/statistics-data", }
+        },
+        { default: () => "查看排行榜" }
+      ),
+    key: "to_product"
   }
 ]
 </script>
 
 <style lang="less">
+
+.go_to_static{
+  display:inline
+}
 </style>

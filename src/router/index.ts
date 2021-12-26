@@ -5,7 +5,7 @@ export default createRouter({
     'routes': [
         {
             path: "/",
-            redirect: "/supplier/home/S000000001"
+            redirect: "/home"
         },
         {
             path: "/test",
