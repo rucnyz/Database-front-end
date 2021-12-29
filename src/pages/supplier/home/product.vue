@@ -38,7 +38,7 @@
         ref="table"
         :columns="columns"
         :data="data"
-        :max-height="400"
+        :max-height="500"
         @update:checked-row-keys="handleCheck"
         virtual-scroll
     />

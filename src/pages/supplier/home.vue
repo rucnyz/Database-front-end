@@ -50,7 +50,7 @@ const menuOptions = [
         },
         { default: () => "查看排行榜" }
       ),
-    key: "to_product"
+    key: "to_statistic"
   }
 ]
 </script>
