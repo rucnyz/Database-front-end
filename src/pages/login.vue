@@ -49,7 +49,7 @@ import {ref, inject} from "vue";
 import {useRouter} from "vue-router";
 import {useMessage} from "naive-ui";
 import {useStore} from "vuex";
-import {getEncrypt} from "../api";
+import {getEncrypt} from "@/api";
 
 const store = useStore(); // 获取vuex实例
 const router = useRouter(); // 获取router实例
